@@ -19,11 +19,10 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, A
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         navigationItem.title = "Books"
-        let plusImage = UIImage(named: "plus")
+        let plusImage = UIImage(named: "plusIcon")
         let addNewBookButton = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(presentBookCreationViewController(_:)))
-        
-//        addNewBookButton.setBackgroundImage(imageWithColor(color: UIColor.red), for: .noraml)
-//        navigationItem.rightBarButtonItem =
+        addNewBookButton.tintColor = UIColor.black
+        navigationItem.rightBarButtonItem = addNewBookButton
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

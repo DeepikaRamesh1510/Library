@@ -68,6 +68,7 @@ class ManageBooks {
         guard let bookEntity = NSEntityDescription.entity(forEntityName: "Book", in: dataManager.persistentContainer.viewContext) else {
             let creationError = CRUDError(errorType: .creationError, errorMessage: "Failed to create entity for the book")
             errorHandler(creationError)
+            return nil
         }
         let book = Book(entity: bookEntity, insertInto: dataManager.persistentContainer.viewContext)
         return book
