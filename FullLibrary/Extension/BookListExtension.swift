@@ -21,6 +21,7 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, A
         navigationItem.title = "Books"
         let plusImage = UIImage(named: "plus")
         let addNewBookButton = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(presentBookCreationViewController(_:)))
+        
 //        addNewBookButton.setBackgroundImage(imageWithColor(color: UIColor.red), for: .noraml)
 //        navigationItem.rightBarButtonItem =
     }
@@ -39,10 +40,19 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, A
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            var isDeleted: Bool = true
             guard let bookTitle = books[indexPath.item].title else {
-                
+                showToast(message: "Deletion Failed!")
+                return
             }
-            ManageBooks.shared.deleteBook(title: books[indexPath.item].title!)
+            ManageBooks.shared.deleteBook(title: bookTitle) { (error) in
+                showToast(message: error.errorType.rawValue)
+                isDeleted = false
+                return
+            }
+            guard isDeleted else {
+                return
+            }
             self.books.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             print(indexPath.item)

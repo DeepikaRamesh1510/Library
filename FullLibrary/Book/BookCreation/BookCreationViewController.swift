@@ -33,7 +33,11 @@ class BookCreationViewController: UIViewController {
         dismissModal()
     }
     @IBAction func insertNewBookIntoLibrary(_ sender: Any) {
-        guard let book = ManageBooks.shared.createManagedObjectBook() else {
+        var isCreated: Bool = true
+        guard let book = ManageBooks.shared.createManagedObjectBook(errorHandler: { (error) in
+            showToast(message: error.errorType.rawValue)
+            print(error)
+        }) else {
             showToast(message: "Creation Failed")
             return
         }
@@ -46,7 +50,14 @@ class BookCreationViewController: UIViewController {
         book.genre = genre.text
         book.noOfPages = Int16(noOfPages.text ?? "0") ?? 0
         book.synopsis = synopsis.text
-        ManageBooks.shared.insertNewBook(book: book)
+        ManageBooks.shared.insertNewBook(book: book) { (error) in
+            showToast(message: error.errorType.rawValue)
+            isCreated = false
+            print(error)
+        }
+        guard isCreated else {
+            return
+        }
         addBookToListDelegate?.addBookToList(newBook: book)
         dismissModal()
     }

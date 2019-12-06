@@ -17,10 +17,9 @@ class ManageBooks {
     
     lazy var dataManager = DataManager()
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Book")
-    func insertNewBook(book: Book,completionHandler: (NSError) -> Void ) {
-        dataManager.saveContext(completionHandler: completionHandler)
+    func insertNewBook(book: Book,errorHandler: (CRUDError) -> Void ) {
+        dataManager.saveContext(errorHandler: errorHandler)
     }
-    
     
     func fetchBooks() -> [Any]? {
         do {
@@ -39,7 +38,7 @@ class ManageBooks {
     func fetchAParticularBook(title: String) -> Book? {
         fetchRequest.predicate = NSPredicate(format: "title=%@", title)
         do {
-           let result = try fetchFromTheDB(fetchRequest: fetchRequest)
+            let result = try fetchFromTheDB(fetchRequest: fetchRequest)
             let book = result[0] as? Book
             return book
         } catch {
@@ -49,7 +48,7 @@ class ManageBooks {
         
     }
     
-    func deleteBook(title: String,completionHandler: (NSError) -> Void){
+    func deleteBook(title: String,errorHandler: (CRUDError) -> Void){
         fetchRequest.predicate = NSPredicate(format: "title=%@", title)
         do {
             let result = try fetchFromTheDB(fetchRequest: fetchRequest)
@@ -58,14 +57,19 @@ class ManageBooks {
                 return
             }
             dataManager.persistentContainer.viewContext.delete(bookToDelete)
-            dataManager.saveContext(completionHandler: completionHandler)
+            dataManager.saveContext(errorHandler: errorHandler)
         } catch {
-            print(error)
+            let deletionError = CRUDError(errorType: .deletionError, errorMessage: error.localizedDescription)
+            errorHandler(deletionError)
         }
     }
     
-    func createManagedObjectBook() -> Book? {
-        let bookEntity = NSEntityDescription(
-        let book = Book(entity: <#T##NSEntityDescription#>, insertInto: dataManager.persistentContainer.viewContext)
+    func createManagedObjectBook(errorHandler: (CRUDError) -> Void) -> Book? {
+        guard let bookEntity = NSEntityDescription.entity(forEntityName: "Book", in: dataManager.persistentContainer.viewContext) else {
+            let creationError = CRUDError(errorType: .creationError, errorMessage: "Failed to create entity for the book")
+            errorHandler(creationError)
+        }
+        let book = Book(entity: bookEntity, insertInto: dataManager.persistentContainer.viewContext)
+        return book
     }
 }
