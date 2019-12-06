@@ -1,0 +1,1 @@
+../../../Target Support Files/FullAuthIOSClient/FullAuthIOSClient-umbrella.h

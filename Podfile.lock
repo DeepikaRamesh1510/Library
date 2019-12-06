@@ -1,0 +1,29 @@
+PODS:
+  - Alamofire (4.9.1)
+  - FullAuthIOSClient (0.6.0):
+    - Alamofire (~> 4.4)
+
+DEPENDENCIES:
+  - FullAuthIOSClient (from `https://github.com/FullCreative/fullauth-api-ios-client.git`, branch `dev_Sathish_WebView`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+
+EXTERNAL SOURCES:
+  FullAuthIOSClient:
+    :branch: dev_Sathish_WebView
+    :git: https://github.com/FullCreative/fullauth-api-ios-client.git
+
+CHECKOUT OPTIONS:
+  FullAuthIOSClient:
+    :commit: ec9d8f114d4441e7cf6b27bdf87886bfb2501102
+    :git: https://github.com/FullCreative/fullauth-api-ios-client.git
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  FullAuthIOSClient: e78bfdfff71486c57c6d51fe7ea836db9fef2a68
+
+PODFILE CHECKSUM: 1cca17469d9bdfb14903b66b453ba98fd5df73f5
+
+COCOAPODS: 1.8.4
