@@ -28,6 +28,7 @@ class BookDetailViewController: UIViewController {
             print("Failed to instatiate book creation view Controller")
             return
         }
+        bookUpdateViewController.navigationBarTitle = "Update Book"
         present(bookUpdateViewController, animated: true, completion: nil)
     }
     

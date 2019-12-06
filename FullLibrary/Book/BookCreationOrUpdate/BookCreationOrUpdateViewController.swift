@@ -10,6 +10,7 @@ import UIKit
 
 class BookCreationOrUpdateViewController: UIViewController {
 
+    @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet var synopsis: UITextField!
     @IBOutlet var noOfPages: UITextField!
     @IBOutlet var genre: UITextField!
@@ -17,11 +18,15 @@ class BookCreationOrUpdateViewController: UIViewController {
     @IBOutlet var bookTitle: UITextField!
     weak var addBookToListDelegate: AddBookToListDelegate?
     var book: Book?
+    var navigationBarTitle: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationBar.topItem?.title = navigationBarTitle
+    }
     
     func dismissModal(){
         self.dismiss(animated: true, completion: nil)

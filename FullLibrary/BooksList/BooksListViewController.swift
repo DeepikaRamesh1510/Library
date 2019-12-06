@@ -33,6 +33,7 @@ class BooksListViewController: UIViewController {
             return
         }
         bookCreationViewController.addBookToListDelegate = self
+        bookCreationViewController.navigationBarTitle = "New Book"
         present(bookCreationViewController, animated: true, completion: nil)
     }
     

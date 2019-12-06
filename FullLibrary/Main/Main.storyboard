@@ -332,7 +332,7 @@
                                 </constraints>
                                 <color key="barTintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
-                                    <navigationItem title="New Book" id="vkq-ph-1r0">
+                                    <navigationItem id="vkq-ph-1r0">
                                         <barButtonItem key="rightBarButtonItem" image="xmark" catalog="system" id="Zpw-OK-Is7">
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
@@ -388,6 +388,7 @@
                                                 <rect key="frame" x="0.0" y="356" width="150" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="FUS-al-2Dg"/>
+                                                    <constraint firstAttribute="height" constant="50" id="dqf-Wf-0pZ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -502,6 +503,7 @@
                         <outlet property="author" destination="pS6-pK-GIF" id="wSj-Xe-ona"/>
                         <outlet property="bookTitle" destination="Sop-XX-KXu" id="CLz-Bc-W29"/>
                         <outlet property="genre" destination="wBZ-eF-fKf" id="QVR-tF-rkD"/>
+                        <outlet property="navigationBar" destination="o5J-Le-F3O" id="45Q-oL-hsl"/>
                         <outlet property="noOfPages" destination="GTz-eV-kGV" id="xdB-Nn-F1u"/>
                         <outlet property="synopsis" destination="hyA-Oc-2wg" id="QSr-3s-F9e"/>
                     </connections>
