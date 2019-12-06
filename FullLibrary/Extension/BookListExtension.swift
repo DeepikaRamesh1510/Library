@@ -18,10 +18,10 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, A
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-        navigationItem.title = "Books"
+        navigationController?.navigationBar.topItem?.title = "Books"
+        navigationController?.navigationBar.tintColor = UIColor.black
         let plusImage = UIImage(named: "plusIcon")
         let addNewBookButton = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(presentBookCreationViewController(_:)))
-        addNewBookButton.tintColor = UIColor.black
         navigationItem.rightBarButtonItem = addNewBookButton
     }
     
@@ -57,6 +57,15 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, A
             print(indexPath.item)
             
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let bookDetailViewController = storyboard?.instantiateViewController(withIdentifier: "BookDetailViewController") as? BookDetailViewController else {
+            print("Failed to open instantiate book detail view controller")
+            return
+        }
+        bookDetailViewController.book = books[indexPath.item]
+        navigationController?.pushViewController(bookDetailViewController, animated: true)
     }
     
     func addBookToList(newBook : Book) {

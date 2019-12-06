@@ -28,7 +28,7 @@ class BooksListViewController: UIViewController {
     }
 
     @objc func presentBookCreationViewController(_ sender: UIBarButtonItem) {
-        guard let bookCreationViewController = storyboard?.instantiateViewController(withIdentifier: "BookCreationViewController") as? BookCreationViewController else {
+        guard let bookCreationViewController = storyboard?.instantiateViewController(withIdentifier: "BookCreationOrUpdateViewController") as? BookCreationOrUpdateViewController else {
             print("Failed to instatiate book creation view Controller")
             return
         }

@@ -15,7 +15,7 @@ class RootNavigationController: UINavigationController {
         super.viewDidLoad()
         modifyAccordingToUserPrefernces()
         validateSession()
-        navigationController?.navigationBar.tintColor = UIColor.black
+        self.navigationBar.tintColor = UIColor.black
     }
    
     func validateSession() {

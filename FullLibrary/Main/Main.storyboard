@@ -307,15 +307,20 @@
                         <viewLayoutGuide key="safeArea" id="pW0-eu-Pcw"/>
                     </view>
                     <navigationItem key="navigationItem" id="SCO-FB-Sbs"/>
+                    <connections>
+                        <outlet property="author" destination="0PN-mW-jAs" id="Q2x-qL-lTS"/>
+                        <outlet property="bookTitle" destination="V0h-cg-roz" id="pBa-VS-YEc"/>
+                        <outlet property="sysnopsis" destination="2aF-QY-2ns" id="4tU-gM-jza"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rL9-UN-urH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="713" y="-1086"/>
         </scene>
-        <!--Book Creation View Controller-->
+        <!--Book Creation Or Update View Controller-->
         <scene sceneID="JND-QB-bvO">
             <objects>
-                <viewController storyboardIdentifier="BookCreationViewController" id="udO-ji-wc6" customClass="BookCreationViewController" customModule="FullBooks" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookCreationOrUpdateViewController" id="udO-ji-wc6" customClass="BookCreationOrUpdateViewController" customModule="FullBooks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vlT-51-7Dd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		019235289F5FEB990E9CF0DB /* libPods-FullLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD01A353552B5F89D2167400 /* libPods-FullLibrary.a */; };
-		CE2C0CF4239835CF00CADB4A /* BookCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF3239835CE00CADB4A /* BookCreationViewController.swift */; };
+		CE2C0CF4239835CF00CADB4A /* BookCreationOrUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF3239835CE00CADB4A /* BookCreationOrUpdateViewController.swift */; };
 		CE2C0CF623983AFD00CADB4A /* BookListCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF523983AFD00CADB4A /* BookListCellTableViewCell.swift */; };
 		CE2C0CFA23983C6B00CADB4A /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF923983C6B00CADB4A /* BookDetailViewController.swift */; };
 		CE2C0CFC2398BFBF00CADB4A /* ManageBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CFB2398BFBF00CADB4A /* ManageBooks.swift */; };
 		CE2E9E17239A276800CF0716 /* ToastForViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E16239A276800CF0716 /* ToastForViewController.swift */; };
 		CE2E9E1C239A32D200CF0716 /* CRUDError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E1B239A32D200CF0716 /* CRUDError.swift */; };
+		CE2E9E1E239A59D300CF0716 /* UpdateBookDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E1D239A59D300CF0716 /* UpdateBookDelegate.swift */; };
 		CE409D7523957586001B5149 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE409D7323957586001B5149 /* Main.storyboard */; };
 		CE409D7623957586001B5149 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE409D7423957586001B5149 /* LaunchScreen.storyboard */; };
 		CE409D8123957C04001B5149 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE409D8023957C04001B5149 /* RootNavigationController.swift */; };
@@ -33,12 +34,13 @@
 /* Begin PBXFileReference section */
 		2E5CA457484983ACC82F3CD6 /* Pods-FullLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullLibrary.release.xcconfig"; path = "Target Support Files/Pods-FullLibrary/Pods-FullLibrary.release.xcconfig"; sourceTree = "<group>"; };
 		385CAD090637FEDA6F1308DB /* Pods-FullLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullLibrary.debug.xcconfig"; path = "Target Support Files/Pods-FullLibrary/Pods-FullLibrary.debug.xcconfig"; sourceTree = "<group>"; };
-		CE2C0CF3239835CE00CADB4A /* BookCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreationViewController.swift; sourceTree = "<group>"; };
+		CE2C0CF3239835CE00CADB4A /* BookCreationOrUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreationOrUpdateViewController.swift; sourceTree = "<group>"; };
 		CE2C0CF523983AFD00CADB4A /* BookListCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListCellTableViewCell.swift; sourceTree = "<group>"; };
 		CE2C0CF923983C6B00CADB4A /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		CE2C0CFB2398BFBF00CADB4A /* ManageBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBooks.swift; sourceTree = "<group>"; };
 		CE2E9E16239A276800CF0716 /* ToastForViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastForViewController.swift; sourceTree = "<group>"; };
 		CE2E9E1B239A32D200CF0716 /* CRUDError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDError.swift; sourceTree = "<group>"; };
+		CE2E9E1D239A59D300CF0716 /* UpdateBookDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBookDelegate.swift; sourceTree = "<group>"; };
 		CE409D7323957586001B5149 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CE409D7423957586001B5149 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE409D8023957C04001B5149 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
@@ -91,23 +93,24 @@
 			isa = PBXGroup;
 			children = (
 				CE2C0CF823983C3C00CADB4A /* BookDisplay */,
-				CE2C0CF723983C2800CADB4A /* BookCreation */,
+				CE2C0CF723983C2800CADB4A /* BookCreationOrUpdate */,
 			);
 			path = Book;
 			sourceTree = "<group>";
 		};
-		CE2C0CF723983C2800CADB4A /* BookCreation */ = {
+		CE2C0CF723983C2800CADB4A /* BookCreationOrUpdate */ = {
 			isa = PBXGroup;
 			children = (
-				CE2C0CF3239835CE00CADB4A /* BookCreationViewController.swift */,
+				CE2C0CF3239835CE00CADB4A /* BookCreationOrUpdateViewController.swift */,
 			);
-			path = BookCreation;
+			path = BookCreationOrUpdate;
 			sourceTree = "<group>";
 		};
 		CE2C0CF823983C3C00CADB4A /* BookDisplay */ = {
 			isa = PBXGroup;
 			children = (
 				CE2C0CF923983C6B00CADB4A /* BookDetailViewController.swift */,
+				CE2E9E1D239A59D300CF0716 /* UpdateBookDelegate.swift */,
 			);
 			path = BookDisplay;
 			sourceTree = "<group>";
@@ -312,8 +315,9 @@
 				CEEEBEA4239540FF006659F8 /* AppDelegate.swift in Sources */,
 				CE2E9E17239A276800CF0716 /* ToastForViewController.swift in Sources */,
 				CE9530282399775B00D9B5D6 /* AddBookToListDelegate.swift in Sources */,
+				CE2E9E1E239A59D300CF0716 /* UpdateBookDelegate.swift in Sources */,
 				CE409D8123957C04001B5149 /* RootNavigationController.swift in Sources */,
-				CE2C0CF4239835CF00CADB4A /* BookCreationViewController.swift in Sources */,
+				CE2C0CF4239835CF00CADB4A /* BookCreationOrUpdateViewController.swift in Sources */,
 				CE2C0CF623983AFD00CADB4A /* BookListCellTableViewCell.swift in Sources */,
 				CE2C0CFC2398BFBF00CADB4A /* ManageBooks.swift in Sources */,
 				CE48F8B92397C54200606F48 /* BooksListViewController.swift in Sources */,

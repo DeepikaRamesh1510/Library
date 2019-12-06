@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BookCreationViewController: UIViewController {
+class BookCreationOrUpdateViewController: UIViewController {
 
     @IBOutlet var synopsis: UITextField!
     @IBOutlet var noOfPages: UITextField!
@@ -16,6 +16,7 @@ class BookCreationViewController: UIViewController {
     @IBOutlet var author: UITextField!
     @IBOutlet var bookTitle: UITextField!
     weak var addBookToListDelegate: AddBookToListDelegate?
+    var book: Book?
     
     override func viewDidLoad() {
         super.viewDidLoad()
