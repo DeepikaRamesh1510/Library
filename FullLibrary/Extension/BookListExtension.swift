@@ -59,16 +59,6 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, A
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "BookCreationSegue" {
-//            guard let bookCreationViewController = segue.destination as? BookCreationViewController else {
-//                print("Unable to cast the viewcontroller to the book creation controller!")
-//                return
-//            }
-//            bookCreationViewController.addBookToListDelegate = self
-//        }
-//    }
-    
     func addBookToList(newBook : Book) {
         books.append(newBook)
         tableView.reloadData()
