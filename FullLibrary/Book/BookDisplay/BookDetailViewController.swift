@@ -20,6 +20,7 @@ class BookDetailViewController: UIViewController {
         navigationItem.title = "Book"
         let updateImage = UIImage(named: "pencilIcon")
         let updateButton = UIBarButtonItem(image: updateImage, style: .plain, target: self, action: #selector(presentUpdateViewController(_:)))
+        navigationItem.rightBarButtonItem = updateButton
     }
     
     @objc func presentUpdateViewController(_ sender: UIBarButtonItem){
