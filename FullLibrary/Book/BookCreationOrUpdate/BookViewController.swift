@@ -26,6 +26,14 @@ class BookCreationOrUpdateViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationBar.topItem?.title = navigationBarTitle
+        guard let bookToBeUpdated = book else {
+            return
+        }
+        bookTitle.text = bookToBeUpdated.title
+        author.text = bookToBeUpdated.authorName
+        noOfPages.text = String(bookToBeUpdated.noOfPages)
+        synopsis.text = bookToBeUpdated.synopsis
+        genre.text = bookToBeUpdated.genre
     }
     
     func dismissModal(){

@@ -10,15 +10,23 @@ import Foundation
 import UIKit
 
 
-extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, AddBookToListDelegate {
+extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, BookProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getTheBooks()
+        peformNavigationViewChanges()
+        assignTableViewProperties()
+    }
+    
+    func assignTableViewProperties() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-        navigationController?.navigationBar.topItem?.title = "Books"
+    }
+    
+    func peformNavigationViewChanges() {
+        navigationController?.changeNavbarTitle(to: "Books")
         navigationController?.navigationBar.tintColor = UIColor.black
         let plusImage = UIImage(named: "plusIcon")
         let addNewBookButton = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(presentBookCreationViewController(_:)))
@@ -30,7 +38,7 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, A
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let bookCell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookListCellTableViewCell
+        let bookCell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookTableViewCell
         bookCell.title.text = books[indexPath.item].title
         bookCell.author.text = books[indexPath.item].authorName
         bookCell.synopsis.text = books[indexPath.item].synopsis
@@ -68,7 +76,10 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, A
         navigationController?.pushViewController(bookDetailViewController, animated: true)
     }
     
-    func addBookToList(newBook : Book) {
+    func performAction(flowState: FlowState,book newBook : Book) {
+        guard flowState == FlowState.create else {
+            return
+        }
         books.append(newBook)
         tableView.reloadData()
     }

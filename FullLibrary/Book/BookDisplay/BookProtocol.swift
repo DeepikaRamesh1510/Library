@@ -9,6 +9,6 @@
 import Foundation
 
 
-protocol UpdateBookDelegate {
-    func updateBook(book: Book)
+protocol BookProtocol {
+    func performAction(flowType: FlowState, book: Book)
 }
