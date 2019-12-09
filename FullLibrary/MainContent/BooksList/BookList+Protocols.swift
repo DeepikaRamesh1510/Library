@@ -10,19 +10,20 @@ import Foundation
 import UIKit
 
 
-extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, BookProtocol {
+extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate,BookProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getTheBooks()
         peformNavigationViewChanges()
-        assignTableViewProperties()
+        assignDelegatePropertiesValue()
 		tableView.tableFooterView = UIView()
     }
     
-    func assignTableViewProperties() {
+    func assignDelegatePropertiesValue() {
         tableView.dataSource = self
         tableView.delegate = self
+		searchBar.delegate = self 
     }
     
     func peformNavigationViewChanges() {
@@ -30,6 +31,16 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, B
         let addNewBookButton = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(presentBookCreationViewController(_:)))
         navigationController?.changeNavigationBarContent(target: self,title: "Books", rightBarButton: addNewBookButton)
     }
+	
+	func performUpdateAction(book: Book) {
+		guard let indexToBeUpdated = books.firstIndex(where:{ (bookInArray) -> Bool in
+			bookInArray.isbn == book.isbn
+		}) else {
+			return
+		}
+		books[indexToBeUpdated] = book
+		tableView.reloadData()
+	}
     
     // MARK: TableViewDelegate methods
     
@@ -73,6 +84,7 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, B
             return
         }
         bookDetailViewController.book = books[indexPath.item]
+		bookDetailViewController.bookUpdationDelegate = self
         navigationController?.pushViewController(bookDetailViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

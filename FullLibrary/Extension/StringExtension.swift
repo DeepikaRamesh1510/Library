@@ -25,4 +25,18 @@ extension String {
 	var length: Int {
 		return self.count
 	}
+	
+	var toInt16: Int16? {
+		return Int16(self)
+	}
+	
+	var isNotEmpty: Bool {
+		return !self.isEmpty
+	}
+}
+
+extension Optional where Wrapped == String {
+	var toInt16: Int16? {
+		return self?.toInt16 ?? 0
+	}
 }

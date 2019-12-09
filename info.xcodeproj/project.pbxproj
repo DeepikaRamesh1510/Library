@@ -23,8 +23,9 @@
 		CE409D85239581DD001B5149 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE409D84239581DD001B5149 /* LoginViewController.swift */; };
 		CE409D89239591EB001B5149 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE409D88239591EB001B5149 /* StringExtension.swift */; };
 		CE48F8B92397C54200606F48 /* BooksListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE48F8B82397C54200606F48 /* BooksListViewController.swift */; };
-		CE7CD005239C12AF004C0B60 /* Book+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CD004239C12AF004C0B60 /* Book+Protocol.swift */; };
 		CE953026239975D500D9B5D6 /* BookList+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE953025239975D500D9B5D6 /* BookList+Protocols.swift */; };
+		CEAC3829239E2B7600BC8394 /* BookDetail+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC3828239E2B7600BC8394 /* BookDetail+Protocol.swift */; };
+		CEAC382B239E608800BC8394 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC382A239E608800BC8394 /* RootViewController.swift */; };
 		CEBC9633239646A400210A1F /* Constants+SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC9632239646A400210A1F /* Constants+SignIn.swift */; };
 		CEBC963623964A6200210A1F /* NetworkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC963523964A6200210A1F /* NetworkExtension.swift */; };
 		CEC8EA302397D6F6006840AF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8EA2F2397D6F6006840AF /* DataManager.swift */; };
@@ -51,8 +52,9 @@
 		CE409D84239581DD001B5149 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CE409D88239591EB001B5149 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		CE48F8B82397C54200606F48 /* BooksListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksListViewController.swift; sourceTree = "<group>"; };
-		CE7CD004239C12AF004C0B60 /* Book+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+Protocol.swift"; sourceTree = "<group>"; };
 		CE953025239975D500D9B5D6 /* BookList+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookList+Protocols.swift"; sourceTree = "<group>"; };
+		CEAC3828239E2B7600BC8394 /* BookDetail+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookDetail+Protocol.swift"; sourceTree = "<group>"; };
+		CEAC382A239E608800BC8394 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		CEBC9632239646A400210A1F /* Constants+SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+SignIn.swift"; sourceTree = "<group>"; };
 		CEBC963523964A6200210A1F /* NetworkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtension.swift; sourceTree = "<group>"; };
 		CEC8EA2F2397D6F6006840AF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -107,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				CE2C0CF3239835CE00CADB4A /* BookViewController.swift */,
-				CE7CD004239C12AF004C0B60 /* Book+Protocol.swift */,
 			);
 			path = BookCreationOrUpdate;
 			sourceTree = "<group>";
@@ -117,15 +118,20 @@
 			children = (
 				CE2C0CF923983C6B00CADB4A /* BookDetailViewController.swift */,
 				CE2E9E1D239A59D300CF0716 /* BookProtocol.swift */,
+				CEAC3828239E2B7600BC8394 /* BookDetail+Protocol.swift */,
 			);
 			path = BookDisplay;
 			sourceTree = "<group>";
 		};
-		CE2E9E22239B823600CF0716 /* Common */ = {
+		CE2E9E22239B823600CF0716 /* MainContent */ = {
 			isa = PBXGroup;
 			children = (
+				CE2C0CF2239835A900CADB4A /* Book */,
+				CEC8EA2E2397CA95006840AF /* CoreData */,
+				CECCF4172397BC2A001201A3 /* BooksList */,
+				CEAC382A239E608800BC8394 /* RootViewController.swift */,
 			);
-			path = Common;
+			path = MainContent;
 			sourceTree = "<group>";
 		};
 		CE409D8A239624C3001B5149 /* Main */ = {
@@ -204,10 +210,7 @@
 		CEEEBEA2239540FF006659F8 /* FullLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				CE2E9E22239B823600CF0716 /* Common */,
-				CE2C0CF2239835A900CADB4A /* Book */,
-				CEC8EA2E2397CA95006840AF /* CoreData */,
-				CECCF4172397BC2A001201A3 /* BooksList */,
+				CE2E9E22239B823600CF0716 /* MainContent */,
 				CEBC963423964A4900210A1F /* Extension */,
 				CE409D8B239624EB001B5149 /* SignIn */,
 				CE409D8A239624C3001B5149 /* Main */,
@@ -324,14 +327,15 @@
 				CEEEBEA4239540FF006659F8 /* AppDelegate.swift in Sources */,
 				CE2E9E17239A276800CF0716 /* ViewControllerExtension.swift in Sources */,
 				CE2E9E1E239A59D300CF0716 /* BookProtocol.swift in Sources */,
+				CEAC3829239E2B7600BC8394 /* BookDetail+Protocol.swift in Sources */,
 				CE409D8123957C04001B5149 /* RootNavigationController.swift in Sources */,
 				CE2C0CF4239835CF00CADB4A /* BookViewController.swift in Sources */,
 				CE2C0CF623983AFD00CADB4A /* BookTableViewCell.swift in Sources */,
 				CE2C0CFC2398BFBF00CADB4A /* ManageBooks.swift in Sources */,
 				CE48F8B92397C54200606F48 /* BooksListViewController.swift in Sources */,
+				CEAC382B239E608800BC8394 /* RootViewController.swift in Sources */,
 				CE2E9E26239B835E00CF0716 /* NavigationControllerExtension.swift in Sources */,
 				CE2E9E1C239A32D200CF0716 /* CRUDError.swift in Sources */,
-				CE7CD005239C12AF004C0B60 /* Book+Protocol.swift in Sources */,
 				CEBC9633239646A400210A1F /* Constants+SignIn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

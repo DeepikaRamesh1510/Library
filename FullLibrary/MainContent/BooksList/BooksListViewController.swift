@@ -11,6 +11,7 @@ import UIKit
 
 class BooksListViewController: UIViewController {
     
+	@IBOutlet var searchBar: UISearchBar!
     @IBOutlet var tableView: UITableView!
     var books = [Book]()
     

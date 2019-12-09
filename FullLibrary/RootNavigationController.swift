@@ -26,13 +26,13 @@ class RootNavigationController: UINavigationController {
         print("Entered validation process")
         var isLoggedIn = true
         if isLoggedIn {
-            guard let booksListViewController = storyboard?.instantiateViewController(withIdentifier: "BooksListViewController") as? BooksListViewController else {
-                    print("Failed to instatiate books list view controller!")
+			guard let rootViewController = storyboard?.instantiateViewController(withIdentifier: ViewController.rootViewController.rawValue) as? RootViewController else {
+                    print("Failed to instatiate root view controller!")
                      return
                 }
-            self.pushViewController(booksListViewController, animated: true)
+            self.pushViewController(rootViewController, animated: true)
         } else {
-            guard let loginViewController = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
+			guard let loginViewController = storyboard?.instantiateViewController(withIdentifier: ViewController.loginViewController.rawValue) as? LoginViewController else {
                     print("Failed to instatiate login view controller!")
                      return
                 }

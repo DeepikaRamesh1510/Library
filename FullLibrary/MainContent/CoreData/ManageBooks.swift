@@ -18,23 +18,28 @@ class ManageBooks {
     lazy var dataManager = DataManager()
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Book")
     
+	
+	func isBookAvailable(isbn: String) -> Bool {
+		guard let _ = fetchParticularBook(isbn: isbn) else {
+			return false
+		}
+		return true
+	}
+	
     // MARK: CRUD operations for a book
-	func insertNewBook(book: Book, flowState: FlowState ,sender: UIViewController,errorHandler: (CRUDError) -> Void ) {
-		guard let bookISBN = book.isbn else {
-			let insertionError = CRUDError(errorType: .persistingError, errorMessage: "Unable to save data")
-            errorHandler(insertionError)
-			return
+	func insertNewBook(title: String,author: String, isbn: String,noOfPages: Int16?,synopsis: String?,genre: String?, errorHandler: (CRUDError) -> Void ) -> Book? {
+		guard let book = self.createManagedObjectBook(errorHandler: errorHandler) else {
+			let insertionError = CRUDError(errorType: .creationError, errorMessage: "Unable to create a new book!")
+			             errorHandler(insertionError)
+			return nil
 		}
-		if flowState == .create{
-			if let bookAlreadyAvailable = fetchParticularBook(isbn: bookISBN), bookAlreadyAvailable.isEqual(book) {
-				dataManager.saveContext(errorHandler: errorHandler)
-			} else {
-				let okAlertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-				sender.showAlert(title: "Alert", message: "Another book same ISBN already exists!", actions: [okAlertAction])
-			}
-		} else {
-			dataManager.saveContext(errorHandler: errorHandler)
-		}
+		book.title = title
+		book.authorName = author
+		book.genre = genre
+		book.isbn = isbn
+		book.synopsis = synopsis
+		dataManager.saveContext(errorHandler: errorHandler)
+		return book
     }
     
     
@@ -53,10 +58,15 @@ class ManageBooks {
     }
     
     func fetchParticularBook(isbn: String) -> Book? {
-        fetchRequest.predicate = NSPredicate(format: "isbn=%@", isbn)
+		fetchRequest.predicate = NSPredicate(format: "isbn=%@", isbn)
         do {
-            let result = try fetchFromTheDB(fetchRequest: fetchRequest)
-            let book = result[0] as? Book
+			let result = try fetchFromTheDB(fetchRequest: fetchRequest)
+			guard  result.count > 0 else {
+				return nil
+			}
+			guard let book = result[0] as? Book else {
+				return nil
+			}
             return book
         } catch {
             print("Error occurred while trying to fetch a book!")
@@ -96,9 +106,12 @@ class ManageBooks {
             return nil
         }
         let book = Book(entity: bookEntity, insertInto: dataManager.persistentContainer.viewContext)
+		
         return book
     }
     
+	
+	
     
     
 }

@@ -13,11 +13,12 @@ class BookViewController: UITableViewController {
 	@IBOutlet var synopsis: UITextField!
 	@IBOutlet var noOfPages: UITextField!
 	@IBOutlet var genre: UITextField!
-	@IBOutlet var isbn: UITextField!
+	@IBOutlet var isbnTextField: UITextField!
 	@IBOutlet var author: UITextField!
 	@IBOutlet var bookTitle: UITextField!
 	
 	weak var addBookToListDelegate: BookProtocol?
+	weak var bookUpdationDelegate: BookUpdationProtocol?
 	var flowState: FlowState = .create
 	var book: Book?
 	
@@ -49,7 +50,7 @@ class BookViewController: UITableViewController {
 		cancelButton.setTitle("Cancel", for: .normal)
 		cancelButton.setTitleColor(UIColor.white, for: .normal)
 		cancelButton.backgroundColor = UIColor.systemRed
-		cancelButton.addTarget(self, action: #selector(closeModal(_:)), for: .allTouchEvents)
+		cancelButton.addTarget(self, action: #selector(closeModal(_:)), for: .touchUpInside)
 		return cancelButton
 	}
 	
@@ -61,7 +62,7 @@ class BookViewController: UITableViewController {
 		saveButton.setTitle("Save", for: .normal)
 		saveButton.setTitleColor(UIColor.black, for: .normal)
 		saveButton.backgroundColor = UIColor.systemYellow
-		saveButton.addTarget(self, action: #selector(saveBookDetails(_:)), for: .allTouchEvents)
+		saveButton.addTarget(self, action: #selector(saveBookDetails(_:)), for: .touchUpInside)
 		return saveButton
 	}
 	
@@ -94,7 +95,7 @@ class BookViewController: UITableViewController {
 		let closeImage = UIImage(named: ImageAssets.close.rawValue)
 		closeButton.setImage(closeImage, for: .normal)
 		closeButton.center.y = header.center.y
-		closeButton.addTarget(self, action: #selector(closeModal(_:)), for: .allTouchEvents)
+		closeButton.addTarget(self, action: #selector(closeModal(_:)), for: .touchUpInside)
 		return closeButton
 	}
 	
@@ -103,6 +104,8 @@ class BookViewController: UITableViewController {
 			customizeHeaderContent(title: "New Book")
 			return
 		}
+		self.isbnTextField.isUserInteractionEnabled = false
+		self.isbnTextField.backgroundColor = UIColor.systemGray
 		customizeHeaderContent(title: "Update Book")
 		guard let bookToBeUpdated = book else {
 			return
@@ -112,6 +115,7 @@ class BookViewController: UITableViewController {
 		noOfPages.text = String(bookToBeUpdated.noOfPages)
 		synopsis.text = bookToBeUpdated.synopsis
 		genre.text = bookToBeUpdated.genre
+		isbnTextField.text = bookToBeUpdated.isbn
 	}
 	
 	@objc func closeModal(_ sender: Any) {
@@ -120,38 +124,49 @@ class BookViewController: UITableViewController {
 
 	// MARK: Save book details into coredata
 	@objc func saveBookDetails(_ sender: Any) {
-		guard let bookTitle = bookTitle.text, let author = author.text, let isbn = isbn.text, bookTitle.length > 0, author.length > 0, isbn.length > 0 else {
+		guard let bookTitle = bookTitle.text, let author = author.text, let isbn = isbnTextField.text, bookTitle.isNotEmpty, author.isNotEmpty, isbn.isNotEmpty else {
 			let okAlertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
 			self.showAlert(title: "Alert", message: "ISBN, title & author are mandatory!", actions: [okAlertAction])
 			print("Unable to unwrap the book details!")
 			return
 		}
 		if flowState == .create {
-			book = ManageBooks.shared.createManagedObjectBook(errorHandler: { (error) in
-							showToast(message: error.errorType.rawValue)
-							print(error)
-						})
-			book?.title = bookTitle
-			book?.authorName = author
-			book?.genre = genre.text
-			book?.noOfPages = Int16(noOfPages.text ?? "0") ?? 0
-			book?.synopsis = synopsis.text
-			book?.isbn = isbn
+			// checking whether the book is already available
+			if ManageBooks.shared.isBookAvailable(isbn: isbn) {
+				let okAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+				self.showAlert(title: "Alert", message: "A book with same ISBN already exists!", actions: [okAlertAction])
+				isbnTextField.text = ""
+				return
+			}
+			
+			// creating a new book if not available
+			guard let newBook = ManageBooks.shared.insertNewBook(title: bookTitle, author: author, isbn: isbn, noOfPages: noOfPages.text.toInt16 , synopsis: synopsis?.text, genre: genre?.text,errorHandler: { (error) in
+				self.showToast(message: error.errorType.rawValue)
+			}) else {
+				self.showToast(message: "Creation Failed!")
+				return
+			}
+			addBookToListDelegate?.performAction(flowState: .create, book: newBook)
+		} else {
+			updateBookDetails()
+			ManageBooks.shared.dataManager.saveContext() { (error) in
+				self.showToast(message: error.errorType.rawValue)
+			}
 		}
-		
-		guard let book = book else {
-			showToast(message: "Failed to Save!")
-			return
-		}
-		
-		ManageBooks.shared.insertNewBook(book: book, flowState: flowState,sender: self) { (error) in
-			showToast(message: error.errorType.rawValue)
-			print(error)
-		}
-//		guard isCreated else {
-//			return
-//		}
-		addBookToListDelegate?.performAction(flowState: .create, book: book)
 		self.dismissViewController()
 	}
+	
+	func updateBookDetails(){
+		guard let book = book, let author = author.text, author.isNotEmpty, let bookTitle = bookTitle.text, bookTitle.isNotEmpty  else {
+			let okAlertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+			self.showAlert(title: "Alert", message: "Title & author are mandatory!", actions: [okAlertAction])
+			return
+		}
+		book.title = bookTitle
+		book.authorName = author
+		book.noOfPages = noOfPages.text?.toInt16 ?? 0
+		book.synopsis = synopsis.text
+		bookUpdationDelegate?.performUpdateAction(book: book)
+	}
+	
 }
