@@ -17,21 +17,21 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, B
         getTheBooks()
         peformNavigationViewChanges()
         assignTableViewProperties()
+		tableView.tableFooterView = UIView()
     }
     
     func assignTableViewProperties() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.tableFooterView = UIView()
     }
     
     func peformNavigationViewChanges() {
-        navigationController?.changeNavbarTitle(to: "Books")
-        navigationController?.navigationBar.tintColor = UIColor.black
-        let plusImage = UIImage(named: "plusIcon")
+		let plusImage = UIImage(named: ImageAssets.plus.rawValue)
         let addNewBookButton = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(presentBookCreationViewController(_:)))
-        navigationItem.rightBarButtonItem = addNewBookButton
+        navigationController?.changeNavigationBarContent(target: self,title: "Books", rightBarButton: addNewBookButton)
     }
+    
+    // MARK: TableViewDelegate methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return books.count
@@ -48,12 +48,12 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, B
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             var isDeleted: Bool = true
-            guard let bookTitle = books[indexPath.item].title else {
+            guard let bookISBN = books[indexPath.item].isbn else {
                 showToast(message: "Deletion Failed!")
                 return
             }
-            ManageBooks.shared.deleteBook(title: bookTitle) { (error) in
-                showToast(message: error.errorType.rawValue)
+            ManageBooks.shared.deleteBook(isbn: bookISBN) { (error) in
+				self.showToast(message: error.errorType.rawValue)
                 isDeleted = false
                 return
             }
@@ -74,7 +74,10 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, B
         }
         bookDetailViewController.book = books[indexPath.item]
         navigationController?.pushViewController(bookDetailViewController, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    // MARK: BookProtocol conformation
     
     func performAction(flowState: FlowState,book newBook : Book) {
         guard flowState == FlowState.create else {

@@ -7,13 +7,19 @@
 //
 
 import UIKit
+
 extension UINavigationController {
-    func changeNavbarTitle(to title: String) {
-        self.navigationBar.topItem?.title = title
+
+    func changeNavigationBarContent(target: UIViewController,title: String, rightBarButton: UIBarButtonItem){
+        target.navigationItem.changeNavbarTitle(to: title)
+        target.navigationItem.rightBarButtonItem = rightBarButton
+        self.navigationBar.tintColor = UIColor.black
+        self.navigationBar.backItem?.title = "Back"
     }
-    
-    func changeNavigationBarContent(title: String, rightBarButtons: [UIBarButtonItem]?){
-        changeNavbarTitle(to: title)
-        self.navigationItem.rightBarButtonItems = rightBarButtons
-    }
+}
+
+extension UINavigationItem {
+     func changeNavbarTitle(to title: String?) {
+        self.title = title
+        }
 }

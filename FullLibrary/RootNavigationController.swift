@@ -15,7 +15,11 @@ class RootNavigationController: UINavigationController {
         super.viewDidLoad()
         modifyAccordingToUserPrefernces()
         validateSession()
-        self.navigationBar.tintColor = UIColor.black
+        configureNaviagtionBar()
+    }
+    
+    func configureNaviagtionBar(){
+        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
     }
    
     func validateSession() {

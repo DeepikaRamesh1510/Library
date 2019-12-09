@@ -17,19 +17,26 @@ class BookDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Book"
-        let updateImage = UIImage(named: "pencilIcon")
-        let updateButton = UIBarButtonItem(image: updateImage, style: .plain, target: self, action: #selector(presentUpdateViewController(_:)))
-        navigationItem.rightBarButtonItem = updateButton
+        performNavigationBarViewChanges()
     }
     
-    @objc func presentUpdateViewController(_ sender: UIBarButtonItem){
-        guard let bookUpdateViewController = storyboard?.instantiateViewController(withIdentifier: "BookCreationOrUpdateViewController") as? BookCreationOrUpdateViewController else {
-            print("Failed to instatiate book creation view Controller")
+    func performNavigationBarViewChanges() {
+		let updateImage = UIImage(named: ImageAssets.pencil.rawValue)
+        let updateButton = UIBarButtonItem(image: updateImage, style: .plain, target: self, action: #selector(presentUpdateViewController(_:)))
+        navigationController?.changeNavigationBarContent(target: self,title: "Book", rightBarButton: updateButton)
+    }
+    
+    @objc func presentUpdateViewController(_ sender: UIBarButtonItem) {
+        guard let bookViewController = storyboard?.instantiateViewController(withIdentifier: ViewController.book.rawValue) as? BookViewController else {
+            print("Failed to instatiate book view Controller")
             return
         }
-        bookUpdateViewController.navigationBarTitle = "Update Book"
-        present(bookUpdateViewController, animated: true, completion: nil)
+//        bookViewController.navigationBarTitle = "Update Book"
+//		if let book = book {
+			bookViewController.book = book
+//		}
+        bookViewController.flowState = .update
+        present(bookViewController, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

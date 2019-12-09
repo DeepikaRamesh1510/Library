@@ -28,13 +28,12 @@ class BooksListViewController: UIViewController {
     }
 
     @objc func presentBookCreationViewController(_ sender: UIBarButtonItem) {
-        guard let bookCreationViewController = storyboard?.instantiateViewController(withIdentifier: "BookCreationOrUpdateViewController") as? BookCreationOrUpdateViewController else {
-            print("Failed to instatiate book creation view Controller")
+        guard let bookViewController = storyboard?.instantiateViewController(withIdentifier: ViewController.book.rawValue) as? BookViewController else {
+            print("Failed to instatiate book view Controller")
             return
         }
-        bookCreationViewController.addBookToListDelegate = self
-        bookCreationViewController.navigationBarTitle = "New Book"
-        present(bookCreationViewController, animated: true, completion: nil)
+        bookViewController.addBookToListDelegate = self
+        present(bookViewController, animated: true, completion: nil)
     }
     
 }

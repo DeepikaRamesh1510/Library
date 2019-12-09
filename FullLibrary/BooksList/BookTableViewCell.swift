@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BookListCellTableViewCell: UITableViewCell {
+class BookTableViewCell: UITableViewCell {
 
     @IBOutlet var bookImage: UIImageView!
     @IBOutlet var synopsis: UILabel!

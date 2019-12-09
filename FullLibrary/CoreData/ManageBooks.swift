@@ -17,9 +17,26 @@ class ManageBooks {
     
     lazy var dataManager = DataManager()
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Book")
-    func insertNewBook(book: Book,errorHandler: (CRUDError) -> Void ) {
-        dataManager.saveContext(errorHandler: errorHandler)
+    
+    // MARK: CRUD operations for a book
+	func insertNewBook(book: Book, flowState: FlowState ,sender: UIViewController,errorHandler: (CRUDError) -> Void ) {
+		guard let bookISBN = book.isbn else {
+			let insertionError = CRUDError(errorType: .persistingError, errorMessage: "Unable to save data")
+            errorHandler(insertionError)
+			return
+		}
+		if flowState == .create{
+			if let bookAlreadyAvailable = fetchParticularBook(isbn: bookISBN), bookAlreadyAvailable.isEqual(book) {
+				dataManager.saveContext(errorHandler: errorHandler)
+			} else {
+				let okAlertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+				sender.showAlert(title: "Alert", message: "Another book same ISBN already exists!", actions: [okAlertAction])
+			}
+		} else {
+			dataManager.saveContext(errorHandler: errorHandler)
+		}
     }
+    
     
     func fetchBooks() -> [Any]? {
         do {
@@ -35,8 +52,8 @@ class ManageBooks {
         return result
     }
     
-    func fetchAParticularBook(title: String) -> Book? {
-        fetchRequest.predicate = NSPredicate(format: "title=%@", title)
+    func fetchParticularBook(isbn: String) -> Book? {
+        fetchRequest.predicate = NSPredicate(format: "isbn=%@", isbn)
         do {
             let result = try fetchFromTheDB(fetchRequest: fetchRequest)
             let book = result[0] as? Book
@@ -48,20 +65,28 @@ class ManageBooks {
         
     }
     
-    func deleteBook(title: String,errorHandler: (CRUDError) -> Void){
-        fetchRequest.predicate = NSPredicate(format: "title=%@", title)
-        do {
-            let result = try fetchFromTheDB(fetchRequest: fetchRequest)
-            guard let bookToDelete = result[0] as? Book  else {
+    func deleteBook(isbn: String,errorHandler: ((CRUDError) -> Void)?){
+//        fetchRequest.predicate = NSPredicate(format: "isbn=%@", )
+//        do {
+//            let result = try fetchFromTheDB(fetchRequest: fetchRequest)
+			let book = fetchParticularBook(isbn: isbn)
+            guard let bookToDelete = book else {
                 print("Unable to find the book in the list!")
+				let deletionError = CRUDError(errorType: .deletionError, errorMessage: "Unable to find the book")
+				guard let errorHandler = errorHandler else {
+					return
+				}
+				errorHandler(deletionError)
                 return
             }
+		guard let errorHandler = errorHandler else {
+			return
+		}
             dataManager.persistentContainer.viewContext.delete(bookToDelete)
             dataManager.saveContext(errorHandler: errorHandler)
-        } catch {
-            let deletionError = CRUDError(errorType: .deletionError, errorMessage: error.localizedDescription)
-            errorHandler(deletionError)
-        }
+//        } catch {
+//
+//        }
     }
     
     func createManagedObjectBook(errorHandler: (CRUDError) -> Void) -> Book? {
@@ -73,4 +98,7 @@ class ManageBooks {
         let book = Book(entity: bookEntity, insertInto: dataManager.persistentContainer.viewContext)
         return book
     }
+    
+    
+    
 }

@@ -14,4 +14,21 @@ enum FlowState {
     case create
 }
 
-enum 
+enum ViewController: String {
+    case bookDetail = "BookDetailVIewController"
+    case book = "BookViewController"
+    case bookList = "BookListViewController"
+}
+
+enum TableViewCell: String {
+    case book = "BookTableViewCell"
+}
+
+
+enum ImageAssets: String {
+	case close
+	case book
+	case google
+	case pencil
+	case plus
+}

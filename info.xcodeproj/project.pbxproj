@@ -8,23 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		019235289F5FEB990E9CF0DB /* libPods-FullLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD01A353552B5F89D2167400 /* libPods-FullLibrary.a */; };
-		CE2C0CF4239835CF00CADB4A /* BookCreationOrUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF3239835CE00CADB4A /* BookCreationOrUpdateViewController.swift */; };
-		CE2C0CF623983AFD00CADB4A /* BookListCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF523983AFD00CADB4A /* BookListCellTableViewCell.swift */; };
+		CE2C0CF4239835CF00CADB4A /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF3239835CE00CADB4A /* BookViewController.swift */; };
+		CE2C0CF623983AFD00CADB4A /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF523983AFD00CADB4A /* BookTableViewCell.swift */; };
 		CE2C0CFA23983C6B00CADB4A /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF923983C6B00CADB4A /* BookDetailViewController.swift */; };
 		CE2C0CFC2398BFBF00CADB4A /* ManageBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CFB2398BFBF00CADB4A /* ManageBooks.swift */; };
-		CE2E9E17239A276800CF0716 /* ToastForViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E16239A276800CF0716 /* ToastForViewController.swift */; };
+		CE2E9E17239A276800CF0716 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E16239A276800CF0716 /* ViewControllerExtension.swift */; };
 		CE2E9E1C239A32D200CF0716 /* CRUDError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E1B239A32D200CF0716 /* CRUDError.swift */; };
-		CE2E9E1E239A59D300CF0716 /* UpdateBookDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E1D239A59D300CF0716 /* UpdateBookDelegate.swift */; };
+		CE2E9E1E239A59D300CF0716 /* BookProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E1D239A59D300CF0716 /* BookProtocol.swift */; };
+		CE2E9E21239B74F000CF0716 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E20239B74F000CF0716 /* Constants.swift */; };
+		CE2E9E26239B835E00CF0716 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E25239B835E00CF0716 /* NavigationControllerExtension.swift */; };
 		CE409D7523957586001B5149 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE409D7323957586001B5149 /* Main.storyboard */; };
 		CE409D7623957586001B5149 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE409D7423957586001B5149 /* LaunchScreen.storyboard */; };
 		CE409D8123957C04001B5149 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE409D8023957C04001B5149 /* RootNavigationController.swift */; };
 		CE409D85239581DD001B5149 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE409D84239581DD001B5149 /* LoginViewController.swift */; };
-		CE409D89239591EB001B5149 /* ValidationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE409D88239591EB001B5149 /* ValidationExtension.swift */; };
+		CE409D89239591EB001B5149 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE409D88239591EB001B5149 /* StringExtension.swift */; };
 		CE48F8B92397C54200606F48 /* BooksListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE48F8B82397C54200606F48 /* BooksListViewController.swift */; };
-		CE953026239975D500D9B5D6 /* BookListExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE953025239975D500D9B5D6 /* BookListExtension.swift */; };
-		CE9530282399775B00D9B5D6 /* AddBookToListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9530272399775B00D9B5D6 /* AddBookToListDelegate.swift */; };
-		CEBC9633239646A400210A1F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC9632239646A400210A1F /* Constants.swift */; };
-		CEBC963623964A6200210A1F /* NetworkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC963523964A6200210A1F /* NetworkExtensions.swift */; };
+		CE7CD005239C12AF004C0B60 /* Book+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CD004239C12AF004C0B60 /* Book+Protocol.swift */; };
+		CE953026239975D500D9B5D6 /* BookList+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE953025239975D500D9B5D6 /* BookList+Protocols.swift */; };
+		CEBC9633239646A400210A1F /* Constants+SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC9632239646A400210A1F /* Constants+SignIn.swift */; };
+		CEBC963623964A6200210A1F /* NetworkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC963523964A6200210A1F /* NetworkExtension.swift */; };
 		CEC8EA302397D6F6006840AF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8EA2F2397D6F6006840AF /* DataManager.swift */; };
 		CEEEBEA4239540FF006659F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEBEA3239540FF006659F8 /* AppDelegate.swift */; };
 		CEEEBEAE239540FF006659F8 /* FullLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEEEBEAC239540FF006659F8 /* FullLibrary.xcdatamodeld */; };
@@ -34,29 +36,32 @@
 /* Begin PBXFileReference section */
 		2E5CA457484983ACC82F3CD6 /* Pods-FullLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullLibrary.release.xcconfig"; path = "Target Support Files/Pods-FullLibrary/Pods-FullLibrary.release.xcconfig"; sourceTree = "<group>"; };
 		385CAD090637FEDA6F1308DB /* Pods-FullLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullLibrary.debug.xcconfig"; path = "Target Support Files/Pods-FullLibrary/Pods-FullLibrary.debug.xcconfig"; sourceTree = "<group>"; };
-		CE2C0CF3239835CE00CADB4A /* BookCreationOrUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreationOrUpdateViewController.swift; sourceTree = "<group>"; };
-		CE2C0CF523983AFD00CADB4A /* BookListCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListCellTableViewCell.swift; sourceTree = "<group>"; };
+		CE2C0CF3239835CE00CADB4A /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
+		CE2C0CF523983AFD00CADB4A /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		CE2C0CF923983C6B00CADB4A /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		CE2C0CFB2398BFBF00CADB4A /* ManageBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBooks.swift; sourceTree = "<group>"; };
-		CE2E9E16239A276800CF0716 /* ToastForViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastForViewController.swift; sourceTree = "<group>"; };
+		CE2E9E16239A276800CF0716 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		CE2E9E1B239A32D200CF0716 /* CRUDError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDError.swift; sourceTree = "<group>"; };
-		CE2E9E1D239A59D300CF0716 /* UpdateBookDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBookDelegate.swift; sourceTree = "<group>"; };
+		CE2E9E1D239A59D300CF0716 /* BookProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookProtocol.swift; sourceTree = "<group>"; };
+		CE2E9E20239B74F000CF0716 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CE2E9E25239B835E00CF0716 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		CE409D7323957586001B5149 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CE409D7423957586001B5149 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE409D8023957C04001B5149 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
 		CE409D84239581DD001B5149 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		CE409D88239591EB001B5149 /* ValidationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationExtension.swift; sourceTree = "<group>"; };
+		CE409D88239591EB001B5149 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		CE48F8B82397C54200606F48 /* BooksListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksListViewController.swift; sourceTree = "<group>"; };
-		CE953025239975D500D9B5D6 /* BookListExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListExtension.swift; sourceTree = "<group>"; };
-		CE9530272399775B00D9B5D6 /* AddBookToListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookToListDelegate.swift; sourceTree = "<group>"; };
-		CEBC9632239646A400210A1F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		CEBC963523964A6200210A1F /* NetworkExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtensions.swift; sourceTree = "<group>"; };
+		CE7CD004239C12AF004C0B60 /* Book+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+Protocol.swift"; sourceTree = "<group>"; };
+		CE953025239975D500D9B5D6 /* BookList+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookList+Protocols.swift"; sourceTree = "<group>"; };
+		CEBC9632239646A400210A1F /* Constants+SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+SignIn.swift"; sourceTree = "<group>"; };
+		CEBC963523964A6200210A1F /* NetworkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtension.swift; sourceTree = "<group>"; };
 		CEC8EA2F2397D6F6006840AF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CEEEBEA0239540FF006659F8 /* FullBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEEBEA3239540FF006659F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		CEEEBEAD239540FF006659F8 /* FullLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FullLibrary.xcdatamodel; sourceTree = "<group>"; };
 		CEEEBEAF23954105006659F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEEEBEB423954105006659F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEF09FA8239BA4DE00DEBA8A /* Books.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Books.json; sourceTree = "<group>"; };
 		DD01A353552B5F89D2167400 /* libPods-FullLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FullLibrary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -101,7 +106,8 @@
 		CE2C0CF723983C2800CADB4A /* BookCreationOrUpdate */ = {
 			isa = PBXGroup;
 			children = (
-				CE2C0CF3239835CE00CADB4A /* BookCreationOrUpdateViewController.swift */,
+				CE2C0CF3239835CE00CADB4A /* BookViewController.swift */,
+				CE7CD004239C12AF004C0B60 /* Book+Protocol.swift */,
 			);
 			path = BookCreationOrUpdate;
 			sourceTree = "<group>";
@@ -110,17 +116,16 @@
 			isa = PBXGroup;
 			children = (
 				CE2C0CF923983C6B00CADB4A /* BookDetailViewController.swift */,
-				CE2E9E1D239A59D300CF0716 /* UpdateBookDelegate.swift */,
+				CE2E9E1D239A59D300CF0716 /* BookProtocol.swift */,
 			);
 			path = BookDisplay;
 			sourceTree = "<group>";
 		};
-		CE2E9E1A239A328F00CF0716 /* Error */ = {
+		CE2E9E22239B823600CF0716 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CE2E9E1B239A32D200CF0716 /* CRUDError.swift */,
 			);
-			path = Error;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		CE409D8A239624C3001B5149 /* Main */ = {
@@ -131,6 +136,7 @@
 				CEEEBEAF23954105006659F8 /* Assets.xcassets */,
 				CE409D7323957586001B5149 /* Main.storyboard */,
 				CE409D7423957586001B5149 /* LaunchScreen.storyboard */,
+				CE2E9E20239B74F000CF0716 /* Constants.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -139,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				CE409D84239581DD001B5149 /* LoginViewController.swift */,
-				CEBC9632239646A400210A1F /* Constants.swift */,
+				CEBC9632239646A400210A1F /* Constants+SignIn.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -147,9 +153,10 @@
 		CEBC963423964A4900210A1F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				CE953025239975D500D9B5D6 /* BookListExtension.swift */,
-				CEBC963523964A6200210A1F /* NetworkExtensions.swift */,
-				CE2E9E16239A276800CF0716 /* ToastForViewController.swift */,
+				CEBC963523964A6200210A1F /* NetworkExtension.swift */,
+				CE2E9E16239A276800CF0716 /* ViewControllerExtension.swift */,
+				CE2E9E25239B835E00CF0716 /* NavigationControllerExtension.swift */,
+				CE409D88239591EB001B5149 /* StringExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -157,9 +164,11 @@
 		CEC8EA2E2397CA95006840AF /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				CE2E9E1B239A32D200CF0716 /* CRUDError.swift */,
 				CEEEBEAC239540FF006659F8 /* FullLibrary.xcdatamodeld */,
 				CE2C0CFB2398BFBF00CADB4A /* ManageBooks.swift */,
 				CEC8EA2F2397D6F6006840AF /* DataManager.swift */,
+				CEF09FA8239BA4DE00DEBA8A /* Books.json */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -168,8 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				CE48F8B82397C54200606F48 /* BooksListViewController.swift */,
-				CE2C0CF523983AFD00CADB4A /* BookListCellTableViewCell.swift */,
-				CE9530272399775B00D9B5D6 /* AddBookToListDelegate.swift */,
+				CE2C0CF523983AFD00CADB4A /* BookTableViewCell.swift */,
+				CE953025239975D500D9B5D6 /* BookList+Protocols.swift */,
 			);
 			path = BooksList;
 			sourceTree = "<group>";
@@ -195,7 +204,7 @@
 		CEEEBEA2239540FF006659F8 /* FullLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				CE2E9E1A239A328F00CF0716 /* Error */,
+				CE2E9E22239B823600CF0716 /* Common */,
 				CE2C0CF2239835A900CADB4A /* Book */,
 				CEC8EA2E2397CA95006840AF /* CoreData */,
 				CECCF4172397BC2A001201A3 /* BooksList */,
@@ -203,7 +212,6 @@
 				CE409D8B239624EB001B5149 /* SignIn */,
 				CE409D8A239624C3001B5149 /* Main */,
 				CE409D8023957C04001B5149 /* RootNavigationController.swift */,
-				CE409D88239591EB001B5149 /* ValidationExtension.swift */,
 			);
 			path = FullLibrary;
 			sourceTree = "<group>";
@@ -308,21 +316,23 @@
 				CE409D85239581DD001B5149 /* LoginViewController.swift in Sources */,
 				CEEEBEAE239540FF006659F8 /* FullLibrary.xcdatamodeld in Sources */,
 				CE2C0CFA23983C6B00CADB4A /* BookDetailViewController.swift in Sources */,
-				CE409D89239591EB001B5149 /* ValidationExtension.swift in Sources */,
-				CEBC963623964A6200210A1F /* NetworkExtensions.swift in Sources */,
+				CE409D89239591EB001B5149 /* StringExtension.swift in Sources */,
+				CE2E9E21239B74F000CF0716 /* Constants.swift in Sources */,
+				CEBC963623964A6200210A1F /* NetworkExtension.swift in Sources */,
 				CEC8EA302397D6F6006840AF /* DataManager.swift in Sources */,
-				CE953026239975D500D9B5D6 /* BookListExtension.swift in Sources */,
+				CE953026239975D500D9B5D6 /* BookList+Protocols.swift in Sources */,
 				CEEEBEA4239540FF006659F8 /* AppDelegate.swift in Sources */,
-				CE2E9E17239A276800CF0716 /* ToastForViewController.swift in Sources */,
-				CE9530282399775B00D9B5D6 /* AddBookToListDelegate.swift in Sources */,
-				CE2E9E1E239A59D300CF0716 /* UpdateBookDelegate.swift in Sources */,
+				CE2E9E17239A276800CF0716 /* ViewControllerExtension.swift in Sources */,
+				CE2E9E1E239A59D300CF0716 /* BookProtocol.swift in Sources */,
 				CE409D8123957C04001B5149 /* RootNavigationController.swift in Sources */,
-				CE2C0CF4239835CF00CADB4A /* BookCreationOrUpdateViewController.swift in Sources */,
-				CE2C0CF623983AFD00CADB4A /* BookListCellTableViewCell.swift in Sources */,
+				CE2C0CF4239835CF00CADB4A /* BookViewController.swift in Sources */,
+				CE2C0CF623983AFD00CADB4A /* BookTableViewCell.swift in Sources */,
 				CE2C0CFC2398BFBF00CADB4A /* ManageBooks.swift in Sources */,
 				CE48F8B92397C54200606F48 /* BooksListViewController.swift in Sources */,
+				CE2E9E26239B835E00CF0716 /* NavigationControllerExtension.swift in Sources */,
 				CE2E9E1C239A32D200CF0716 /* CRUDError.swift in Sources */,
-				CEBC9633239646A400210A1F /* Constants.swift in Sources */,
+				CE7CD005239C12AF004C0B60 /* Book+Protocol.swift in Sources */,
+				CEBC9633239646A400210A1F /* Constants+SignIn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

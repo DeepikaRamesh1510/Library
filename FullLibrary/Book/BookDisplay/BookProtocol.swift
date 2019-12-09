@@ -9,6 +9,6 @@
 import Foundation
 
 
-protocol BookProtocol {
-    func performAction(flowType: FlowState, book: Book)
+protocol BookProtocol: class {
+    func performAction(flowState: FlowState, book: Book)
 }

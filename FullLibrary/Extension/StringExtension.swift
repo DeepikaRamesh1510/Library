@@ -14,10 +14,15 @@ extension String {
         let testEmail = NSPredicate(format:"SELF MATCHES %@", regularExpressionForEmail)
         return testEmail.evaluate(with: self)
     }
+	
     var isValidPassword: Bool {
         guard self.count > 4 else {
             return false
         }
         return true
     }
+	
+	var length: Int {
+		return self.count
+	}
 }
