@@ -43,9 +43,10 @@ class ManageBooks {
     }
     
     
-    func fetchBooks() -> [Any]? {
+    func fetchBooks() -> [Book]? {
         do {
-            return try fetchFromTheDB(fetchRequest: fetchRequest)
+            let result = try fetchFromTheDB(fetchRequest: fetchRequest)
+			return result.compactMap({ $0 as? Book})
         } catch {
             print(error)
             return nil
@@ -74,11 +75,23 @@ class ManageBooks {
         }
         
     }
+	
+	func fetchBooksBasedOnSearch(by searchWord: String) -> [Book] {
+		let titlePredicate = NSPredicate(format: "title CONTAINS[c] %@", searchWord)
+		let authorPredicate = NSPredicate(format: "authorName CONTAINS[c] %@", searchWord)
+		fetchRequest.predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, authorPredicate])
+		do {
+			let result = try fetchFromTheDB(fetchRequest: fetchRequest)
+			let books = result.compactMap { $0 as? Book }
+            return books
+        } catch {
+            print("Error occurred while trying to fetch a book!")
+            return []
+        }
+		
+	}
     
     func deleteBook(isbn: String,errorHandler: ((CRUDError) -> Void)?){
-//        fetchRequest.predicate = NSPredicate(format: "isbn=%@", )
-//        do {
-//            let result = try fetchFromTheDB(fetchRequest: fetchRequest)
 			let book = fetchParticularBook(isbn: isbn)
             guard let bookToDelete = book else {
                 print("Unable to find the book in the list!")
@@ -94,9 +107,6 @@ class ManageBooks {
 		}
             dataManager.persistentContainer.viewContext.delete(bookToDelete)
             dataManager.saveContext(errorHandler: errorHandler)
-//        } catch {
-//
-//        }
     }
     
     func createManagedObjectBook(errorHandler: (CRUDError) -> Void) -> Book? {

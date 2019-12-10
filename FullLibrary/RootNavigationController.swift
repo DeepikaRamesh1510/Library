@@ -50,4 +50,5 @@ class RootNavigationController: UINavigationController {
         self.navigationBar.barTintColor = UIColor.systemYellow
         self.navigationController?.navigationBar.tintColor = UIColor.black
     }
+	
 }

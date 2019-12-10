@@ -355,9 +355,79 @@
             <point key="canvasLocation" x="713" y="-1086"/>
         </scene>
         <!--Book View Controller-->
+        <scene sceneID="2Sc-nQ-ivC">
+            <objects>
+                <viewController storyboardIdentifier="BookViewController" id="MaF-e3-gHp" customClass="BookViewController" customModule="FullBooks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rix-0B-ZcH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PdS-6c-3xt">
+                                <rect key="frame" x="0.0" y="597" width="375" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GW8-ae-O04">
+                                        <rect key="frame" x="30" y="15" width="315" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Pbm-Iv-u1O"/>
+                                        </constraints>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="GW8-ae-O04" firstAttribute="centerY" secondItem="PdS-6c-3xt" secondAttribute="centerY" id="3F2-2B-lkg"/>
+                                    <constraint firstItem="GW8-ae-O04" firstAttribute="leading" secondItem="PdS-6c-3xt" secondAttribute="leading" constant="30" id="ToK-2L-zuo"/>
+                                    <constraint firstItem="GW8-ae-O04" firstAttribute="centerX" secondItem="PdS-6c-3xt" secondAttribute="centerX" id="bJ6-bT-HSb"/>
+                                    <constraint firstAttribute="height" constant="70" id="gTW-U6-4ty"/>
+                                    <constraint firstAttribute="trailing" secondItem="GW8-ae-O04" secondAttribute="trailing" constant="30" id="nsT-nu-DpQ"/>
+                                </constraints>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI1-QZ-i9c">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem title="Title" id="ikx-9b-sZ5"/>
+                                </items>
+                            </navigationBar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LJg-2a-7Sl">
+                                <rect key="frame" x="0.0" y="44" width="375" height="553"/>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ZI1-QZ-i9c" firstAttribute="trailing" secondItem="RGC-eU-ACn" secondAttribute="trailing" id="6bl-Ln-Zmq"/>
+                            <constraint firstItem="RGC-eU-ACn" firstAttribute="trailing" secondItem="LJg-2a-7Sl" secondAttribute="trailing" id="7D9-re-K9A"/>
+                            <constraint firstItem="RGC-eU-ACn" firstAttribute="trailing" secondItem="PdS-6c-3xt" secondAttribute="trailing" id="8R4-Yj-nNt"/>
+                            <constraint firstItem="LJg-2a-7Sl" firstAttribute="leading" secondItem="RGC-eU-ACn" secondAttribute="leading" id="Cjo-at-R5Z"/>
+                            <constraint firstItem="ZI1-QZ-i9c" firstAttribute="leading" secondItem="RGC-eU-ACn" secondAttribute="leading" id="OLu-to-Z2d"/>
+                            <constraint firstItem="ZI1-QZ-i9c" firstAttribute="top" secondItem="RGC-eU-ACn" secondAttribute="top" id="Ube-lP-qoQ"/>
+                            <constraint firstItem="PdS-6c-3xt" firstAttribute="leading" secondItem="RGC-eU-ACn" secondAttribute="leading" id="YBg-yf-JW1"/>
+                            <constraint firstItem="LJg-2a-7Sl" firstAttribute="top" secondItem="ZI1-QZ-i9c" secondAttribute="bottom" id="fpu-lI-rrj"/>
+                            <constraint firstItem="RGC-eU-ACn" firstAttribute="bottom" secondItem="PdS-6c-3xt" secondAttribute="bottom" id="g3f-LC-Ghr"/>
+                            <constraint firstItem="PdS-6c-3xt" firstAttribute="top" secondItem="LJg-2a-7Sl" secondAttribute="bottom" id="k4L-Fd-Vo1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RGC-eU-ACn"/>
+                    </view>
+                    <connections>
+                        <outlet property="staticTableContainer" destination="LJg-2a-7Sl" id="QRJ-hC-lXO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rZT-Wd-inB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1887" y="-897"/>
+        </scene>
+        <!--Book Static Table View Controller-->
         <scene sceneID="t2g-Af-hYj">
             <objects>
-                <tableViewController storyboardIdentifier="BookViewController" id="gEp-7z-Dz5" customClass="BookViewController" customModule="FullBooks" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="BookStaticTableViewController" id="gEp-7z-Dz5" customClass="BookStaticTableViewController" customModule="FullBooks" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0Qk-ek-crb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -592,7 +662,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CyX-8d-Yql" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="KY1-hv-fqe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1884" y="-761"/>
+            <point key="canvasLocation" x="2682" y="-910"/>
         </scene>
         <!--Item-->
         <scene sceneID="GZs-zu-7uc">
@@ -602,6 +672,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="MX6-pC-MRQ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="0bi-7Q-zcx"/>
                 </viewController>
@@ -615,6 +686,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="pHE-3v-3qx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TBu-HC-lPm">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

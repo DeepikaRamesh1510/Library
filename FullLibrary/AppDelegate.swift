@@ -14,9 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var code: String?
-    
+    var floatingButtonController: FloatingButtonController?
+	
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 //        OAuthInstance().getCodeByProvidingTheClientID()
+		floatingButtonController = FloatingButtonController()
         return true
     }
     

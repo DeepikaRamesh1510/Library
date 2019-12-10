@@ -16,10 +16,12 @@ enum FlowState {
 
 enum ViewController: String {
 	case rootViewController = "RootViewController"
-    case bookDetail = "BookDetailVIewController"
-    case book = "BookViewController"
-    case bookList = "BookListViewController"
+    case bookDetailViewController = "BookDetailViewController"
+    case bookTableViewController = "BookStaticTableViewController"
+    case bookListViewController = "BookListViewController"
 	case loginViewController = "LoginViewController"
+	case bookViewController = "BookViewController"
+	case floatingButtonController = "FloatingButtonController"
 }
 
 enum TableViewCell: String {

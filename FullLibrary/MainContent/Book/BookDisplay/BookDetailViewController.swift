@@ -29,13 +29,22 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 	}
 	
 	@objc func presentUpdateViewController(_ sender: UIBarButtonItem) {
-		guard let bookViewController = storyboard?.instantiateViewController(withIdentifier: ViewController.book.rawValue) as? BookViewController else {
+		guard let bookViewController = storyboard?.instantiateViewController(withIdentifier: ViewController.bookViewController.rawValue) as? BookViewController else {
 			print("Failed to instatiate book view Controller")
 			return
 		}
-		bookViewController.book = book
-		bookViewController.flowState = .update
-		bookViewController.bookUpdationDelegate = self
+//		guard var staticTable = bookViewController.children[0] as? BookStaticTableViewController else {
+//			print("Failed to initialize static table view content!")
+//			return
+//		}
+		guard let staticTable = storyboard?.instantiateViewController(withIdentifier: ViewController.bookTableViewController.rawValue) as? BookStaticTableViewController else {
+			print("Failed to instantiate static table content viwe controller")
+			return
+		}
+		staticTable.book = book
+		staticTable.flowState = .update
+		staticTable.bookUpdationDelegate = self
+//		bookViewController.staticTableContainer.
 		present(bookViewController, animated: true, completion: nil)
 	}
 	func performUpdateAction(book: Book) {
