@@ -11,7 +11,7 @@ import UIKit
 class BookTableViewCell: UITableViewCell {
 
     @IBOutlet var bookImage: UIImageView!
-    @IBOutlet var synopsis: UILabel!
+//    @IBOutlet var genre: UILabel!
     @IBOutlet var title: UILabel!
     @IBOutlet var author: UILabel!
     override func awakeFromNib() {

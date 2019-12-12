@@ -14,23 +14,20 @@ class BooksListViewController: UIViewController {
 	@IBOutlet var searchBar: UISearchBar!
     @IBOutlet var tableView: UITableView!
 	var books = [Book]()
-    
+	var xmlParser: XMLParser?
+	var goodReadBooks = [GoodReadsBook]()
+	var goodReadBook = GoodReadsBook()
+	var foundCharacters = ""
     func getTheBooks(){
         guard let result = ManageBooks.shared.fetchBooks() else {
             print("Unable to fetch data!")
             return
         }
 		self.books = result
-//        for book in result {
-//            guard let book = book as? Book else {
-//                continue
-//            }
-//            books.append(book)
-//        }
     }
 
     @objc func presentBookCreationViewController(_ sender: UIBarButtonItem) {
-        guard let bookViewController = storyboard?.instantiateViewController(withIdentifier: ViewController.bookViewController.rawValue) as? BookStaticTableViewController else {
+        guard let bookViewController = storyboard?.instantiateViewController(withIdentifier: ViewController.bookViewController.rawValue) as? BookViewController else {
             print("Failed to instatiate book view Controller")
             return
         }

@@ -12,7 +12,8 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 	
 	@IBOutlet var bookTitle: UILabel!
 	@IBOutlet var author: UILabel!
-	@IBOutlet var sysnopsis: UITextView!
+	@IBOutlet var synopsis: UITextView!
+	@IBOutlet var genreAndNoOfPages: UILabel!
 	var book: Book?
 	var bookUpdationDelegate: BookUpdationProtocol?
 	
@@ -33,10 +34,6 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 			print("Failed to instatiate book view Controller")
 			return
 		}
-//		guard var staticTable = bookViewController.children[0] as? BookStaticTableViewController else {
-//			print("Failed to initialize static table view content!")
-//			return
-//		}
 		guard let staticTable = storyboard?.instantiateViewController(withIdentifier: ViewController.bookTableViewController.rawValue) as? BookStaticTableViewController else {
 			print("Failed to instantiate static table content viwe controller")
 			return
@@ -44,7 +41,8 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 		staticTable.book = book
 		staticTable.flowState = .update
 		staticTable.bookUpdationDelegate = self
-//		bookViewController.staticTableContainer.
+		let appDelegate = UIApplication.shared.delegate as? AppDelegate
+		appDelegate?.floatingButtonController?.isVisible = false
 		present(bookViewController, animated: true, completion: nil)
 	}
 	func performUpdateAction(book: Book) {
@@ -56,6 +54,14 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 	func updatePageWithContents() {
 		bookTitle.text = book?.title
 		author.text = book?.authorName
-		sysnopsis.text = book?.synopsis ?? "Sysnopsis is not provided for this book"
+		synopsis.text = book?.synopsis ?? "Sysnopsis is not provided for this book"
+//		let genre = (book?.genre ?? "" ).isEmpty ? "Genre not specicfied" : book?.genre!
+		let noOfPages = book?.noOfPages ?? 0
+		if let genre = book?.genre, genre.isNotEmpty {
+			genreAndNoOfPages.text = "\(genre) | \(noOfPages) Pages"
+		} else {
+			 genreAndNoOfPages.text = "Genre not specicfied | \(noOfPages) Pages"
+		}
+			
 	}
 }

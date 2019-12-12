@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		019235289F5FEB990E9CF0DB /* libPods-FullLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD01A353552B5F89D2167400 /* libPods-FullLibrary.a */; };
+		CE1BDE3D23A2206A00B6A3EA /* GoodReadsNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BDE3C23A2206A00B6A3EA /* GoodReadsNetworkRequest.swift */; };
 		CE2C0CF4239835CF00CADB4A /* BookStaticTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF3239835CE00CADB4A /* BookStaticTableViewController.swift */; };
 		CE2C0CF623983AFD00CADB4A /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF523983AFD00CADB4A /* BookTableViewCell.swift */; };
 		CE2C0CFA23983C6B00CADB4A /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0CF923983C6B00CADB4A /* BookDetailViewController.swift */; };
@@ -32,14 +33,19 @@
 		CEBC9633239646A400210A1F /* Constants+SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC9632239646A400210A1F /* Constants+SignIn.swift */; };
 		CEBC963623964A6200210A1F /* NetworkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC963523964A6200210A1F /* NetworkExtension.swift */; };
 		CEC8EA302397D6F6006840AF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8EA2F2397D6F6006840AF /* DataManager.swift */; };
+		CED93C8A23A0F33B00877E4E /* XMLResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED93C8923A0F33B00877E4E /* XMLResponseParser.swift */; };
 		CEEEBEA4239540FF006659F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEBEA3239540FF006659F8 /* AppDelegate.swift */; };
 		CEEEBEAE239540FF006659F8 /* FullLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEEEBEAC239540FF006659F8 /* FullLibrary.xcdatamodeld */; };
 		CEEEBEB023954105006659F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEEBEAF23954105006659F8 /* Assets.xcassets */; };
+		CEFB9A77239F7C1400CF5649 /* BookStaticTableView+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB9A76239F7C1400CF5649 /* BookStaticTableView+Protocol.swift */; };
+		CEFB9A7A239FA80900CF5649 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB9A79239FA80900CF5649 /* NetworkManager.swift */; };
+		CEFB9A7C239FA82000CF5649 /* NetworkContants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB9A7B239FA82000CF5649 /* NetworkContants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2E5CA457484983ACC82F3CD6 /* Pods-FullLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullLibrary.release.xcconfig"; path = "Target Support Files/Pods-FullLibrary/Pods-FullLibrary.release.xcconfig"; sourceTree = "<group>"; };
 		385CAD090637FEDA6F1308DB /* Pods-FullLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FullLibrary.debug.xcconfig"; path = "Target Support Files/Pods-FullLibrary/Pods-FullLibrary.debug.xcconfig"; sourceTree = "<group>"; };
+		CE1BDE3C23A2206A00B6A3EA /* GoodReadsNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodReadsNetworkRequest.swift; sourceTree = "<group>"; };
 		CE2C0CF3239835CE00CADB4A /* BookStaticTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStaticTableViewController.swift; sourceTree = "<group>"; };
 		CE2C0CF523983AFD00CADB4A /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		CE2C0CF923983C6B00CADB4A /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
@@ -64,12 +70,16 @@
 		CEBC9632239646A400210A1F /* Constants+SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+SignIn.swift"; sourceTree = "<group>"; };
 		CEBC963523964A6200210A1F /* NetworkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtension.swift; sourceTree = "<group>"; };
 		CEC8EA2F2397D6F6006840AF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		CED93C8923A0F33B00877E4E /* XMLResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLResponseParser.swift; sourceTree = "<group>"; };
 		CEEEBEA0239540FF006659F8 /* FullBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEEBEA3239540FF006659F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		CEEEBEAD239540FF006659F8 /* FullLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FullLibrary.xcdatamodel; sourceTree = "<group>"; };
 		CEEEBEAF23954105006659F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEEEBEB423954105006659F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEF09FA8239BA4DE00DEBA8A /* Books.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Books.json; sourceTree = "<group>"; };
+		CEFB9A76239F7C1400CF5649 /* BookStaticTableView+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookStaticTableView+Protocol.swift"; sourceTree = "<group>"; };
+		CEFB9A79239FA80900CF5649 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CEFB9A7B239FA82000CF5649 /* NetworkContants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkContants.swift; sourceTree = "<group>"; };
 		DD01A353552B5F89D2167400 /* libPods-FullLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FullLibrary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -115,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2C0CF3239835CE00CADB4A /* BookStaticTableViewController.swift */,
+				CEFB9A76239F7C1400CF5649 /* BookStaticTableView+Protocol.swift */,
 				CE9D6608239EBF1F007AA2DE /* BookViewController.swift */,
 			);
 			path = BookCreationOrUpdate;
@@ -227,6 +238,7 @@
 		CEEEBEA2239540FF006659F8 /* FullLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				CEFB9A78239FA7AE00CF5649 /* Network */,
 				CE2E9E22239B823600CF0716 /* MainContent */,
 				CEBC963423964A4900210A1F /* Extension */,
 				CE409D8B239624EB001B5149 /* SignIn */,
@@ -234,6 +246,17 @@
 				CE409D8023957C04001B5149 /* RootNavigationController.swift */,
 			);
 			path = FullLibrary;
+			sourceTree = "<group>";
+		};
+		CEFB9A78239FA7AE00CF5649 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CEFB9A79239FA80900CF5649 /* NetworkManager.swift */,
+				CEFB9A7B239FA82000CF5649 /* NetworkContants.swift */,
+				CED93C8923A0F33B00877E4E /* XMLResponseParser.swift */,
+				CE1BDE3C23A2206A00B6A3EA /* GoodReadsNetworkRequest.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +358,7 @@
 			files = (
 				CE409D85239581DD001B5149 /* LoginViewController.swift in Sources */,
 				CEEEBEAE239540FF006659F8 /* FullLibrary.xcdatamodeld in Sources */,
+				CED93C8A23A0F33B00877E4E /* XMLResponseParser.swift in Sources */,
 				CE2C0CFA23983C6B00CADB4A /* BookDetailViewController.swift in Sources */,
 				CE9D6609239EBF1F007AA2DE /* BookViewController.swift in Sources */,
 				CE409D89239591EB001B5149 /* StringExtension.swift in Sources */,
@@ -349,11 +373,15 @@
 				CE9D660E239F5436007AA2DE /* FloatingButtonController.swift in Sources */,
 				CE409D8123957C04001B5149 /* RootNavigationController.swift in Sources */,
 				CE2C0CF4239835CF00CADB4A /* BookStaticTableViewController.swift in Sources */,
+				CEFB9A7A239FA80900CF5649 /* NetworkManager.swift in Sources */,
+				CE1BDE3D23A2206A00B6A3EA /* GoodReadsNetworkRequest.swift in Sources */,
+				CEFB9A77239F7C1400CF5649 /* BookStaticTableView+Protocol.swift in Sources */,
 				CE2C0CF623983AFD00CADB4A /* BookTableViewCell.swift in Sources */,
 				CE2C0CFC2398BFBF00CADB4A /* ManageBooks.swift in Sources */,
 				CE48F8B92397C54200606F48 /* BooksListViewController.swift in Sources */,
 				CEAC382B239E608800BC8394 /* RootViewController.swift in Sources */,
 				CE9D660C239F51F3007AA2DE /* FloatingWindow.swift in Sources */,
+				CEFB9A7C239FA82000CF5649 /* NetworkContants.swift in Sources */,
 				CE2E9E26239B835E00CF0716 /* NavigationControllerExtension.swift in Sources */,
 				CE2E9E1C239A32D200CF0716 /* CRUDError.swift in Sources */,
 				CEBC9633239646A400210A1F /* Constants+SignIn.swift in Sources */,

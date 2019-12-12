@@ -23,6 +23,9 @@ class RootNavigationController: UINavigationController {
     }
    
     func validateSession() {
+//		GoodReadResponse().decodeXMLData()
+//		let xmlResponseParser = XMLResponseParser()
+//		xmlResponseParser.parseTheXMLData()
         print("Entered validation process")
         var isLoggedIn = true
         if isLoggedIn {

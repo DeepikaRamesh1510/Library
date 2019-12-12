@@ -35,4 +35,9 @@ enum ImageAssets: String {
 	case google
 	case pencil
 	case plus
+	case back
+}
+
+enum ContainerSegue: String {
+	case bookStaticTable = "BookStaticTableSegue"
 }

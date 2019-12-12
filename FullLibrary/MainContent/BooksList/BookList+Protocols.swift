@@ -20,6 +20,8 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 		tableView.tableFooterView = UIView()
 	}
 	
+	
+	
 	func assignDelegatePropertiesValue() {
 		tableView.dataSource = self
 		tableView.delegate = self
@@ -27,9 +29,7 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 	}
 	
 	func peformNavigationViewChanges() {
-		let plusImage = UIImage(named: ImageAssets.plus.rawValue)
-		let addNewBookButton = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(presentBookCreationViewController(_:)))
-		navigationController?.changeNavigationBarContent(target: self,title: "Books", rightBarButton: addNewBookButton)
+		self.tabBarController?.navigationItem.title = "Books"
 	}
 	
 	func performUpdateAction(book: Book) {
@@ -52,7 +52,6 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 		let bookCell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookTableViewCell
 		bookCell.title.text = books[indexPath.item].title
 		bookCell.author.text = books[indexPath.item].authorName
-		bookCell.synopsis.text = books[indexPath.item].synopsis
 		return bookCell
 	}
 	
@@ -103,24 +102,25 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		if searchText.isEmpty {
-			guard let allBooks = ManageBooks.shared.fetchBooks() else {
-				return
-			}
-			self.books = allBooks
+//			guard let allBooks = ManageBooks.shared.fetchBooks() else {
+//				return
+//			}
+//			fetchBooks(bySearch: searchText)
+//			self.books = allBooks
 		} else {
-			self.books = ManageBooks.shared.fetchBooksBasedOnSearch(by: searchText)
+//			self.books = ManageBooks.shared.fetchBooksBasedOnSearch(by: searchText)
+			fetchBooks(bySearch: searchText) { (data) in
+				let xmlResponseParser = XMLResponseParser()
+				self.goodReadBooks = xmlResponseParser.parseTheXMLData(xmlData: data)
+				self.tableView.reloadData()
+			}
 		}
 		self.tableView.reloadData()
 	}
 	
-	//	func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-	//		guard let searchText = searchBar.text, searchText.isEmpty else {
-	//			return
-	//		}
-	//		guard let allBooks = ManageBooks.shared.fetchBooks() else {
-	//			return
-	//		}
-	//		self.books = allBooks
-	//		self.tableView.reloadData()
-	//	}
+	//MARK: fetching books list from the goodsReads server
+	func fetchBooks(bySearch searchString: String, completionHandler: @escaping (Data) -> Void) {
+		GoodReadsNetworkRequest.shared.fetchBooks(bySearch: searchString, completionHandler: completionHandler)
+	}
+	
 }

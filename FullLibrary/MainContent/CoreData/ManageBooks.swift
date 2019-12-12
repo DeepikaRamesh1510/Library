@@ -120,8 +120,8 @@ class ManageBooks {
         return book
     }
     
+	func checkForChanges() -> Bool {
+		return dataManager.persistentContainer.viewContext.hasChanges
+	}
 	
-	
-    
-    
 }
