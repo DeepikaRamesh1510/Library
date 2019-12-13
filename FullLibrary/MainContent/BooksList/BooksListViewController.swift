@@ -15,9 +15,7 @@ class BooksListViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
 	var books = [Book]()
 	var xmlParser: XMLParser?
-	var goodReadBooks = [GoodReadsBook]()
-	var goodReadBook = GoodReadsBook()
-	var foundCharacters = ""
+	var searchText = ""
     func getTheBooks(){
         guard let result = ManageBooks.shared.fetchBooks() else {
             print("Unable to fetch data!")

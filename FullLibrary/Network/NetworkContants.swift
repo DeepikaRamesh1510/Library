@@ -19,13 +19,13 @@ enum HTTPResponseError:String , Error {
 	case undefined
 }
 
-class GoodReadsBook {
-	var bookId = String()
-	var synopsis = String()
-	var title = String()
-	var name = String()
-	var imageUrl = String()
-}
+//class GoodReadsBook {
+//	var bookId = String()
+//	var synopsis = String()
+//	var title = String()
+//	var name = String()
+//	var imageUrl = String()
+//}
 
 struct GoodReadsConstants {
 	let goodReadsBaseUrl = "https://www.goodreads.com/"

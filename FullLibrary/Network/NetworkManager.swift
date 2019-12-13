@@ -11,8 +11,8 @@ import Alamofire
 
 
 class NetworkManager {
-//	let shared = NetworkManager()
-//	init() { }
+	//	let shared = NetworkManager()
+	//	init() { }
 	
 	//MARK: Generic network request
 	
@@ -30,59 +30,52 @@ class NetworkManager {
 		}
 	}
 	
-	func makeRequest(url: URLConvertible, method: HTTPMethod,encoding: ParameterEncoding?,parameters: Parameters?, headers: HTTPHeaders?, completionHandler:@escaping (Data) -> Void ) {
-		let parameterEncoding = encoding ?? URLEncoding.default
-		Alamofire.request(url, method: method, parameters: parameters, encoding: parameterEncoding, headers: headers).validate(validationClosure).response { response in
-			print(response)
-			guard let data = response.data else {
-				print("Data not received!")
-				return
+	func downloadFile(fileURL: String, completionHandler: @escaping (Data?, Error?) -> Void) {
+		Alamofire.download(fileURL).validate().responseData { response in
+			switch response.result {
+				case .success:
+					guard let data = response.value else {
+						print("Data not received!")
+						return
+					}
+					completionHandler(data, nil)
+				case let .failure(error):
+					completionHandler(nil, error)
 			}
-			completionHandler(data)
+//			if let data = response.value {
+//
+//			}
+			
+		}
+//		print("Code to download image and later it will be stored in the coredata!")
+	}
+	
+	func makeRequest(url: URLConvertible, method: HTTPMethod,encoding: ParameterEncoding?,parameters: Parameters?, headers: HTTPHeaders?, completionHandler:@escaping (Data?, Error?) -> Void ) {
+		let parameterEncoding = encoding ?? URLEncoding.default
+		Alamofire.request(url, method: method, parameters: parameters, encoding: parameterEncoding, headers: headers).validate(validationClosure).responseData { response in
+			switch response.result {
+				case .success:
+					guard let data = response.data else {
+						print("Data not received!")
+						return
+					}
+					completionHandler(data, nil)
+				case let .failure(error):
+					completionHandler(nil, error)
+			}
 		}
 	}
 	
 	//MARK: Get requests
 	
 	//get request with all the encoding, parameters and headers
-	func getRequest(url: URLConvertible, encoding: ParameterEncoding?,parameters: Parameters?, headers: HTTPHeaders?, completionHandler: @escaping (Data) -> Void) {
+	func getRequest(url: URLConvertible, encoding: ParameterEncoding?,parameters: Parameters?, headers: HTTPHeaders?, completionHandler: @escaping (Data?, Error?) -> Void) {
 		makeRequest(url: url, method: .get, encoding: encoding, parameters: parameters, headers: headers, completionHandler: completionHandler)
-	}
-	
-	//get request without encoding
-	func getRequest(url: URLConvertible,parameters: Parameters?, headers: HTTPHeaders?, completionHandler: @escaping (Data) -> Void) {
-		makeRequest(url: url, method: .get, encoding: nil, parameters: parameters, headers: headers, completionHandler: completionHandler)
-	}
-	
-	//get request without parameters but it has headers
-	func getRequest(url: URLConvertible, headers: HTTPHeaders?, completionHandler: @escaping (Data) -> Void) {
-		makeRequest(url: url, method: .get, encoding: nil, parameters: nil, headers: headers, completionHandler: completionHandler)
-	}
-	
-	//get request with just only parameters
-	func getRequest(url: URLConvertible,parameters: Parameters?, completionHandler: @escaping (Data) -> Void) {
-		makeRequest(url: url, method: .get, encoding: nil, parameters: parameters, headers: nil, completionHandler: completionHandler)
 	}
 	
 	//MARK: Post Request
 	//Post request with all the encoding, parameters and headers
-	func postRequest(url: URLConvertible, encoding: ParameterEncoding?,parameters: Parameters?, headers: HTTPHeaders?, completionHandler: @escaping (Data) -> Void) {
+	func postRequest(url: URLConvertible, encoding: ParameterEncoding?,parameters: Parameters?, headers: HTTPHeaders?, completionHandler: @escaping (Data?, Error?) -> Void) {
 		makeRequest(url: url, method: .post, encoding: encoding, parameters: parameters, headers: headers, completionHandler: completionHandler)
 	}
-	
-	//Post request without encoding
-	func postRequest(url: URLConvertible,parameters: Parameters?, headers: HTTPHeaders?, completionHandler: @escaping (Data) -> Void) {
-		makeRequest(url: url, method: .post, encoding: nil, parameters: parameters, headers: headers, completionHandler: completionHandler)
-	}
-	
-	//Post request without parameters but it has headers
-	func postRequest(url: URLConvertible, headers: HTTPHeaders?, completionHandler: @escaping (Data) -> Void) {
-		makeRequest(url: url, method: .post, encoding: nil, parameters: nil, headers: headers, completionHandler: completionHandler)
-	}
-	
-	//Post request with just only parameters
-	func postRequest(url: URLConvertible,parameters: Parameters?, completionHandler: @escaping (Data) -> Void) {
-		makeRequest(url: url, method: .post, encoding: nil, parameters: parameters, headers: nil, completionHandler: completionHandler)
-	}
-	
 }

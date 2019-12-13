@@ -17,10 +17,13 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 		getTheBooks()
 		peformNavigationViewChanges()
 		assignDelegatePropertiesValue()
-		tableView.tableFooterView = UIView()
+		tableAndKeyboardViewChanges()
 	}
 	
-	
+	func tableAndKeyboardViewChanges() {
+		tableView.tableFooterView = UIView()
+		tableView.keyboardDismissMode = .onDrag
+	}
 	
 	func assignDelegatePropertiesValue() {
 		tableView.dataSource = self
@@ -100,26 +103,48 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 	
 	// MARK: search bar operations
 	
-	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-		if searchText.isEmpty {
-//			guard let allBooks = ManageBooks.shared.fetchBooks() else {
-//				return
-//			}
-//			fetchBooks(bySearch: searchText)
-//			self.books = allBooks
-		} else {
-//			self.books = ManageBooks.shared.fetchBooksBasedOnSearch(by: searchText)
-			fetchBooks(bySearch: searchText) { (data) in
-				let xmlResponseParser = XMLResponseParser()
-				self.goodReadBooks = xmlResponseParser.parseTheXMLData(xmlData: data)
-				self.tableView.reloadData()
-			}
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		guard searchText.length > 0  else {
+			return
 		}
-		self.tableView.reloadData()
+		fetchBooks(bySearch: self.searchText) { (data,error) in
+			if let error = error {
+				print(error.localizedDescription)
+				return
+			}
+			guard let data = data else {
+				print("Data not received!")
+				return
+			}
+			let xmlResponseParser = XMLResponseParser()
+			self.books = xmlResponseParser.parseTheXMLData(xmlData: data)
+			self.tableView.reloadData()
+		}
+		self.searchBar.endEditing(true)
+	}
+	
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		self.searchText = searchText
+//		if searchText.isEmpty {
+//		} else {
+//			fetchBooks(bySearch: searchText) { (data,error) in
+//				if let error = error {
+//					print(error.localizedDescription)
+//					return
+//				}
+//				guard let data = data else {
+//					print("Data not received!")
+//					return
+//				}
+//				let xmlResponseParser = XMLResponseParser()
+//				self.books = xmlResponseParser.parseTheXMLData(xmlData: data)
+//				self.tableView.reloadData()
+//			}
+//		}
 	}
 	
 	//MARK: fetching books list from the goodsReads server
-	func fetchBooks(bySearch searchString: String, completionHandler: @escaping (Data) -> Void) {
+	func fetchBooks(bySearch searchString: String, completionHandler: @escaping (Data?, Error?) -> Void) {
 		GoodReadsNetworkRequest.shared.fetchBooks(bySearch: searchString, completionHandler: completionHandler)
 	}
 	

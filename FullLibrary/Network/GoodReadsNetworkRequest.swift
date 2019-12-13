@@ -23,10 +23,13 @@ class GoodReadsNetworkRequest {
 		parameters = ["key" : goodReadsConstants.key]
 	}
 	
-	func fetchBooks(bySearch searchString: String, completionHandler: @escaping (Data) -> Void) {
+	func fetchBooks(bySearch searchString: String, completionHandler: @escaping (Data?,Error?) -> Void) {
         parameters["q"] = searchString
-		let results = [GoodReadsBook]()
-		networkManager.getRequest(url: goodReadsConstants.getEndPoint(path: .searchBooksWithNameAuthorISBN), parameters: parameters, completionHandler: completionHandler)
+		networkManager.getRequest(url: goodReadsConstants.getEndPoint(path: .searchBooksWithNameAuthorISBN), encoding: nil, parameters: parameters, headers: nil, completionHandler: completionHandler)
+	}
+	
+	func fetchBookImage(imageURL: String) {
+		
 	}
 //	return results
 	
