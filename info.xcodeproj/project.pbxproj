@@ -20,6 +20,7 @@
 		CE2E9E26239B835E00CF0716 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E25239B835E00CF0716 /* NavigationControllerExtension.swift */; };
 		CE3E9B5D23A53AD000DEE83C /* TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9B5C23A53AD000DEE83C /* TableExtension.swift */; };
 		CE3E9B6123A74A6700DEE83C /* BookList+TableViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9B6023A74A6600DEE83C /* BookList+TableViewHelper.swift */; };
+		CE3E9B6323A7630300DEE83C /* BookList+SearchBarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9B6223A7630300DEE83C /* BookList+SearchBarHelper.swift */; };
 		CE409D7523957586001B5149 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE409D7323957586001B5149 /* Main.storyboard */; };
 		CE409D7623957586001B5149 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE409D7423957586001B5149 /* LaunchScreen.storyboard */; };
 		CE409D8123957C04001B5149 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE409D8023957C04001B5149 /* RootNavigationController.swift */; };
@@ -59,6 +60,7 @@
 		CE2E9E25239B835E00CF0716 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		CE3E9B5C23A53AD000DEE83C /* TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableExtension.swift; sourceTree = "<group>"; };
 		CE3E9B6023A74A6600DEE83C /* BookList+TableViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookList+TableViewHelper.swift"; sourceTree = "<group>"; };
+		CE3E9B6223A7630300DEE83C /* BookList+SearchBarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookList+SearchBarHelper.swift"; sourceTree = "<group>"; };
 		CE409D7323957586001B5149 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CE409D7423957586001B5149 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE409D8023957C04001B5149 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				CE2C0CF523983AFD00CADB4A /* BookTableViewCell.swift */,
 				CE953025239975D500D9B5D6 /* BookList+Protocols.swift */,
 				CE3E9B6023A74A6600DEE83C /* BookList+TableViewHelper.swift */,
+				CE3E9B6223A7630300DEE83C /* BookList+SearchBarHelper.swift */,
 			);
 			path = BooksList;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				CE1BDE3D23A2206A00B6A3EA /* GoodReadsNetworkRequest.swift in Sources */,
 				CEFB9A77239F7C1400CF5649 /* BookStaticTableView+Protocol.swift in Sources */,
 				CE2C0CF623983AFD00CADB4A /* BookTableViewCell.swift in Sources */,
+				CE3E9B6323A7630300DEE83C /* BookList+SearchBarHelper.swift in Sources */,
 				CE2C0CFC2398BFBF00CADB4A /* ManageBooks.swift in Sources */,
 				CE48F8B92397C54200606F48 /* BooksListViewController.swift in Sources */,
 				CEAC382B239E608800BC8394 /* RootViewController.swift in Sources */,
