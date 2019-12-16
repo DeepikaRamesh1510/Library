@@ -18,6 +18,8 @@
 		CE2E9E1E239A59D300CF0716 /* BookProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E1D239A59D300CF0716 /* BookProtocol.swift */; };
 		CE2E9E21239B74F000CF0716 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E20239B74F000CF0716 /* Constants.swift */; };
 		CE2E9E26239B835E00CF0716 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E9E25239B835E00CF0716 /* NavigationControllerExtension.swift */; };
+		CE3E9B5D23A53AD000DEE83C /* TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9B5C23A53AD000DEE83C /* TableExtension.swift */; };
+		CE3E9B6123A74A6700DEE83C /* BookList+TableViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9B6023A74A6600DEE83C /* BookList+TableViewHelper.swift */; };
 		CE409D7523957586001B5149 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE409D7323957586001B5149 /* Main.storyboard */; };
 		CE409D7623957586001B5149 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE409D7423957586001B5149 /* LaunchScreen.storyboard */; };
 		CE409D8123957C04001B5149 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE409D8023957C04001B5149 /* RootNavigationController.swift */; };
@@ -55,6 +57,8 @@
 		CE2E9E1D239A59D300CF0716 /* BookProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookProtocol.swift; sourceTree = "<group>"; };
 		CE2E9E20239B74F000CF0716 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE2E9E25239B835E00CF0716 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
+		CE3E9B5C23A53AD000DEE83C /* TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableExtension.swift; sourceTree = "<group>"; };
+		CE3E9B6023A74A6600DEE83C /* BookList+TableViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookList+TableViewHelper.swift"; sourceTree = "<group>"; };
 		CE409D7323957586001B5149 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CE409D7423957586001B5149 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE409D8023957C04001B5149 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 				CE2E9E16239A276800CF0716 /* ViewControllerExtension.swift */,
 				CE2E9E25239B835E00CF0716 /* NavigationControllerExtension.swift */,
 				CE409D88239591EB001B5149 /* StringExtension.swift */,
+				CE3E9B5C23A53AD000DEE83C /* TableExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				CE48F8B82397C54200606F48 /* BooksListViewController.swift */,
 				CE2C0CF523983AFD00CADB4A /* BookTableViewCell.swift */,
 				CE953025239975D500D9B5D6 /* BookList+Protocols.swift */,
+				CE3E9B6023A74A6600DEE83C /* BookList+TableViewHelper.swift */,
 			);
 			path = BooksList;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 				CEAC3829239E2B7600BC8394 /* BookDetail+Protocol.swift in Sources */,
 				CE9D660E239F5436007AA2DE /* FloatingButtonController.swift in Sources */,
 				CE409D8123957C04001B5149 /* RootNavigationController.swift in Sources */,
+				CE3E9B6123A74A6700DEE83C /* BookList+TableViewHelper.swift in Sources */,
 				CE2C0CF4239835CF00CADB4A /* BookStaticTableViewController.swift in Sources */,
 				CEFB9A7A239FA80900CF5649 /* NetworkManager.swift in Sources */,
 				CE1BDE3D23A2206A00B6A3EA /* GoodReadsNetworkRequest.swift in Sources */,
@@ -385,6 +392,7 @@
 				CE2E9E26239B835E00CF0716 /* NavigationControllerExtension.swift in Sources */,
 				CE2E9E1C239A32D200CF0716 /* CRUDError.swift in Sources */,
 				CEBC9633239646A400210A1F /* Constants+SignIn.swift in Sources */,
+				CE3E9B5D23A53AD000DEE83C /* TableExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,15 +9,31 @@
 import Foundation
 import UIKit
 
-
-extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate ,BookProtocol {
+//,BookProtocol -> removed the book protocol in
+extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		getTheBooks()
 		peformNavigationViewChanges()
 		assignDelegatePropertiesValue()
 		tableAndKeyboardViewChanges()
+		renderingSearchBar()
+		renderingSegmentedControl()
+		renderViewAccordingToLibraryState()
+	}
+	
+	func renderingSegmentedControl() {
+		if #available(iOS 13.0, *) {
+			segmentedControl.selectedSegmentTintColor = UIColor.systemYellow
+		}
+		segmentedControl.tintColor = UIColor.systemYellow
+
+	}
+	
+	func renderViewAccordingToLibraryState() {
+		if libraryState == .myLibrary {
+			getTheBooks()
+		}
 	}
 	
 	func tableAndKeyboardViewChanges() {
@@ -25,81 +41,44 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 		tableView.keyboardDismissMode = .onDrag
 	}
 	
+	func renderingSearchBar() {
+		self.searchBar.image(for: .search, state: .normal)
+		self.searchBar.delegate = self
+	}
+	
 	func assignDelegatePropertiesValue() {
 		tableView.dataSource = self
 		tableView.delegate = self
-		self.searchBar.delegate = self
 	}
 	
 	func peformNavigationViewChanges() {
 		self.tabBarController?.navigationItem.title = "Books"
 	}
 	
-	func performUpdateAction(book: Book) {
-		guard let indexToBeUpdated = books.firstIndex(where:{ (bookInArray) -> Bool in
-			bookInArray.isbn == book.isbn
-		}) else {
-			return
-		}
-		books[indexToBeUpdated] = book
-		tableView.reloadData()
-	}
+//		func performUpdateAction(book: Book) {
+//			guard let indexToBeUpdated = myLibraryBooks.firstIndex(where:{ (bookInArray) -> Bool in
+//	//			bookInArray.isbn == book.isbn
+//			}) else {
+//				return
+//			}
+//			myLibraryBooks[indexToBeUpdated] = book
+//			tableView.reloadData()
+//		}
+	
+	
 	
 	// MARK: TableViewDelegate methods
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return books.count
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let bookCell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookTableViewCell
-		bookCell.title.text = books[indexPath.item].title
-		bookCell.author.text = books[indexPath.item].authorName
-		return bookCell
-	}
-	
-	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		if editingStyle == .delete {
-			var isDeleted: Bool = true
-			guard let bookISBN = books[indexPath.item].isbn else {
-				showToast(message: "Deletion Failed!")
-				return
-			}
-			ManageBooks.shared.deleteBook(isbn: bookISBN) { (error) in
-				self.showToast(message: error.errorType.rawValue)
-				isDeleted = false
-				return
-			}
-			guard isDeleted else {
-				return
-			}
-			self.books.remove(at: indexPath.row)
-			tableView.deleteRows(at: [indexPath], with: .fade)
-			print(indexPath.item)
-			
-		}
-	}
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		guard let bookDetailViewController = storyboard?.instantiateViewController(withIdentifier: "BookDetailViewController") as? BookDetailViewController else {
-			print("Failed to open instantiate book detail view controller")
-			return
-		}
-		bookDetailViewController.book = books[indexPath.item]
-		bookDetailViewController.bookUpdationDelegate = self
-		navigationController?.pushViewController(bookDetailViewController, animated: true)
-		tableView.deselectRow(at: indexPath, animated: true)
-	}
 	
 	// MARK: BookProtocol conformation
 	
-	func performAction(flowState: FlowState,book newBook : Book) {
-		guard flowState == FlowState.create else {
-			return
-		}
-		books.append(newBook)
-		tableView.reloadData()
-	}
+	//	func performAction(flowState: FlowState,book newBook : Book) {
+	//		guard flowState == FlowState.create else {
+	//			return
+	//		}
+	//		books.append(newBook)
+	//		tableView.reloadData()
+	//	}
 	
 	// MARK: search bar operations
 	
@@ -107,7 +86,26 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 		guard searchText.length > 0  else {
 			return
 		}
-		fetchBooks(bySearch: self.searchText) { (data,error) in
+		if libraryState == .goodReads {
+			fetchBooksInGoodReadsLibrary(bySearch: self.searchText)
+		} else {
+			fetchBooksInMyLibrary(bySearch: searchText)
+		}
+		
+		self.searchBar.endEditing(true)
+	}
+	
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		self.searchText = searchText
+		if libraryState == .myLibrary {
+			fetchBooksInMyLibrary(bySearch: searchText)
+		}
+		
+	}
+	
+	//MARK: fetching books list from the goodsReads server
+	func fetchBooksInGoodReadsLibrary(bySearch searchString: String) {
+		GoodReadsNetworkRequest.shared.fetchBooks(bySearch: searchString) { (data,error) in
 			if let error = error {
 				print(error.localizedDescription)
 				return
@@ -117,35 +115,23 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 				return
 			}
 			let xmlResponseParser = XMLResponseParser()
-			self.books = xmlResponseParser.parseTheXMLData(xmlData: data)
+			self.goodReadsBooks = xmlResponseParser.parseTheXMLData(xmlData: data)
 			self.tableView.reloadData()
 		}
-		self.searchBar.endEditing(true)
 	}
 	
-	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-		self.searchText = searchText
-//		if searchText.isEmpty {
-//		} else {
-//			fetchBooks(bySearch: searchText) { (data,error) in
-//				if let error = error {
-//					print(error.localizedDescription)
-//					return
-//				}
-//				guard let data = data else {
-//					print("Data not received!")
-//					return
-//				}
-//				let xmlResponseParser = XMLResponseParser()
-//				self.books = xmlResponseParser.parseTheXMLData(xmlData: data)
-//				self.tableView.reloadData()
-//			}
-//		}
-	}
+	//MARK: fetching books from my library
 	
-	//MARK: fetching books list from the goodsReads server
-	func fetchBooks(bySearch searchString: String, completionHandler: @escaping (Data?, Error?) -> Void) {
-		GoodReadsNetworkRequest.shared.fetchBooks(bySearch: searchString, completionHandler: completionHandler)
+	func fetchBooksInMyLibrary(bySearch: String) {
+		if searchText.isEmpty {
+			guard let allBooks = ManageBooks.shared.fetchBooks() else {
+				return
+			}
+			self.myLibraryBooks = allBooks
+		} else {
+			self.myLibraryBooks = ManageBooks.shared.fetchBooksBasedOnSearch(by: searchText)
+		}
+		self.tableView.reloadData()
 	}
 	
 }

@@ -32,5 +32,4 @@ class GoodReadsNetworkRequest {
 		
 	}
 //	return results
-	
 }

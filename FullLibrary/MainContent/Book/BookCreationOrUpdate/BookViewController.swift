@@ -9,19 +9,27 @@
 import UIKit
 
 class BookViewController: UIViewController {
-
+	
 	@IBOutlet var bookViewBackButton: UIButton!
 	@IBOutlet var bookViewTitle: UILabel!
 	@IBOutlet var staticTableContainer: UIView!
+	@IBOutlet var saveButton: UIButton!
 	var bookStaticTableController: BookStaticTableViewController?
 	var addBookToListDelegate: BookProtocol?
 	var bookUpdationDelegate: BookUpdationProtocol?
 	var flowState: FlowState = .create
 	override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-    
+		super.viewDidLoad()
+		renderForFlowState()
+	}
+	
+	func renderForFlowState() {
+//		if flowState == .create {
+//			self.saveButton.titleLabel?.text = "Add Books To Library"
+//		} else {
+//			self.saveButton.titleLabel?.text = "Update Book"
+//		}
+	}
 	
 	@IBAction func closeTheViewController(_ sender: Any) {
 		guard checkForAnyChanges() else {
@@ -36,9 +44,7 @@ class BookViewController: UIViewController {
 	}
 	
 	func dismissBookView() {
-		let appDelegate = UIApplication.shared.delegate as? AppDelegate
 		self.dismissViewController()
-		appDelegate?.floatingButtonController?.isVisible = true
 	}
 	
 	func checkForAnyChanges() -> Bool {
@@ -54,10 +60,10 @@ class BookViewController: UIViewController {
 			}
 			if flowState == .create {
 				bookStaticTableViewController.addBookToListDelegate = self.addBookToListDelegate
-				bookViewTitle?.text = "New Book"
+				bookViewTitle?.text = "Add Book"
 			} else {
 				bookStaticTableViewController.bookUpdationDelegate = self.bookUpdationDelegate
-				bookViewTitle?.text = "New Book"
+				bookViewTitle?.text = "Update Book"
 			}
 		}
 	}

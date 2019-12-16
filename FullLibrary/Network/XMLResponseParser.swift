@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class XMLResponseParser: NSObject, XMLParserDelegate {
-	var books = [Book]()
+	var books = [GoodReadsBook]()
 	var xmlParser: XMLParser?
 	var elementName = String()
 	var title = ""
@@ -22,7 +22,7 @@ class XMLResponseParser: NSObject, XMLParserDelegate {
 	
 	//MARK: Serializing the XML Data
 	
-	func parseTheXMLData(xmlData: Data) -> [Book] {
+	func parseTheXMLData(xmlData: Data) -> [GoodReadsBook] {
 		xmlParser = XMLParser(data: xmlData)
 		xmlParser?.delegate = self
 		xmlParser?.parse()
@@ -63,22 +63,22 @@ class XMLResponseParser: NSObject, XMLParserDelegate {
 	
 	func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
 		if elementName == "best_book" {
-			guard let book = ManageBooks.shared.createManagedObjectBook(errorHandler: { (error) in
-				print("error occured while creating instances for the book!")
-			}) else {
-				print("Failed to creat the book managed object!")
-				return
-			}
-			book.bookId = self.id;
-			book.authorName = self.authorName;
-			book.title = self.title;
-			print(book)
-			self.books.append(book);
+			let tempBook = GoodReadsBook()
+			tempBook.bookId = self.id;
+			tempBook.authorName = self.authorName;
+			tempBook.title = self.title;
+			print(tempBook)
+			self.books.append(tempBook);
 		}
 	}
 	
 	func parserDidEndDocument(_ parser: XMLParser) {
 		print("Here we should have func to ")
+	}
+	
+	// functtion to fetch the image for the books
+	func getImageForBooks(completionHandler: @escaping (GoodReadsBook) -> Void) {
+		
 	}
 	
 }

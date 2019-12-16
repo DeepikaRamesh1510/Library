@@ -41,8 +41,8 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 		staticTable.book = book
 		staticTable.flowState = .update
 		staticTable.bookUpdationDelegate = self
-		let appDelegate = UIApplication.shared.delegate as? AppDelegate
-		appDelegate?.floatingButtonController?.isVisible = false
+//		let appDelegate = UIApplication.shared.delegate as? AppDelegate
+//		appDelegate?.floatingButtonController?.isVisible = false
 		present(bookViewController, animated: true, completion: nil)
 	}
 	func performUpdateAction(book: Book) {

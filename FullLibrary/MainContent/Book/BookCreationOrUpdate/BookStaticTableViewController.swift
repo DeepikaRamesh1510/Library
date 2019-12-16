@@ -10,12 +10,13 @@ import UIKit
 
 class BookStaticTableViewController: UITableViewController {
 	
-	@IBOutlet var synopsis: UITextField!
+	@IBOutlet var synopsis: UITextView!
 	@IBOutlet var noOfPages: UITextField!
 	@IBOutlet var genre: UITextField!
 	@IBOutlet var isbnTextField: UITextField!
 	@IBOutlet var author: UITextField!
 	@IBOutlet var bookTitle: UITextField!
+	@IBOutlet var noOfCopies: UITextField!
 	weak var addBookToListDelegate: BookProtocol?
 	weak var bookUpdationDelegate: BookUpdationProtocol?
 	var flowState: FlowState = .create

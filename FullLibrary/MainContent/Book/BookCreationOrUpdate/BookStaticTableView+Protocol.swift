@@ -10,6 +10,9 @@ import UIKit
 
 extension BookStaticTableViewController {
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		if indexPath.item == 5 {
+			return 150
+		}
 		return 60
 	}
 }

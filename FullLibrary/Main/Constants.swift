@@ -14,6 +14,20 @@ enum FlowState {
     case create
 }
 
+enum LibraryState: Int {
+	case goodReads
+	case myLibrary
+	
+	mutating func toggle() {
+		switch self {
+			case .goodReads:
+				self = .myLibrary
+			case .myLibrary:
+				self = .goodReads
+		}
+	}
+}
+
 enum ViewController: String {
 	case rootViewController = "RootViewController"
     case bookDetailViewController = "BookDetailViewController"
