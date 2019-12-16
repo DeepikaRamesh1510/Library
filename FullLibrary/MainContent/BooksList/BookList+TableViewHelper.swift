@@ -66,7 +66,20 @@ extension BooksListViewController {
 		guard libraryState == .goodReads  else {
 			return modifyBookCellByState(title: myLibraryBooks[indexPath.item].title ?? "", author: myLibraryBooks[indexPath.item].authorName ?? "")
 		}
-		return modifyBookCellByState(title: goodReadsBooks[indexPath.item].title, author: goodReadsBooks[indexPath.item].authorName)
+		let goodReadsBookCell = modifyBookCellByState(title: goodReadsBooks[indexPath.item].title, author: goodReadsBooks[indexPath.item].authorName)
+		print("Image url",goodReadsBooks[indexPath.item].imageUrl)
+		GoodReadsNetworkRequest.shared.fetchBookImage(imageURL: goodReadsBooks[indexPath.item].imageUrl){ (data,error) in
+			if let error = error {
+				print(error.localizedDescription)
+				return
+			}
+			guard let data = data else {
+				print("Data not received!")
+				return
+			}
+			goodReadsBookCell.bookImage.image = UIImage(data: data)
+		}
+		return goodReadsBookCell
 	}
 	
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -77,17 +90,22 @@ extension BooksListViewController {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if libraryState == .myLibrary {
-			guard let bookDetailViewController = storyboard?.instantiateViewController(withIdentifier: "BookDetailViewController") as? BookDetailViewController else {
-				print("Failed to open instantiate book detail view controller")
-				return
-			}
-			bookDetailViewController.book = myLibraryBooks[indexPath.item]
-			//			bookDetailViewController.bookUpdationDelegate = self
-			navigationController?.pushViewController(bookDetailViewController, animated: true)
-		}
+		libraryState == .goodReads ? showBookDetailPage(goodReadsBook: goodReadsBooks[indexPath.item], myLibraryBook: nil) : showBookDetailPage(goodReadsBook: nil, myLibraryBook: myLibraryBooks[indexPath.item])
 		
 		tableView.deselectRow(at: indexPath, animated: true)
+	}
+	
+	func showBookDetailPage(goodReadsBook: GoodReadsBook?,myLibraryBook: Book?) {
+		guard let bookDetailViewController = storyboard?.instantiateViewController(withIdentifier: ViewController.bookDetailViewController.rawValue) as? BookDetailViewController else {
+			return
+		}
+		if libraryState == .myLibrary {
+			bookDetailViewController.myLibraryBook = myLibraryBook
+		} else {
+			bookDetailViewController.goodReadsBook = goodReadsBook
+		}
+		bookDetailViewController.libraryState = libraryState
+		navigationController?.pushViewController(bookDetailViewController, animated: true)
 	}
 	
 }

@@ -30,25 +30,28 @@ class NetworkManager {
 		}
 	}
 	
-	func downloadFile(fileURL: String, completionHandler: @escaping (Data?, Error?) -> Void) {
-		Alamofire.download(fileURL).validate().responseData { response in
-			switch response.result {
-				case .success:
-					guard let data = response.value else {
-						print("Data not received!")
-						return
-					}
-					completionHandler(data, nil)
-				case let .failure(error):
-					completionHandler(nil, error)
-			}
-//			if let data = response.value {
-//
+//	func downloadFile(fileURL: String, completionHandler: @escaping (Data?, Error?) -> Void) {
+//		DispatchQueue.main.async {
+//			Alamofire.download("https://httpbin.org/image/png").responseData { response in
+//				if let data = response.value {
+//					completionHandler(data, nil)
+//				}
 //			}
-			
-		}
-//		print("Code to download image and later it will be stored in the coredata!")
-	}
+//		}
+		
+//		Alamofire.download(fileURL).responseData { response in
+//			switch response.result {
+//				case .success:
+//					guard let data = response.value else {
+//						print("Data not received!")
+//						return
+//					}
+//					completionHandler(data, nil)
+//				case let .failure(error):
+//					completionHandler(nil, error)
+//			}
+//		}
+//	}
 	
 	func makeRequest(url: URLConvertible, method: HTTPMethod,encoding: ParameterEncoding?,parameters: Parameters?, headers: HTTPHeaders?, completionHandler:@escaping (Data?, Error?) -> Void ) {
 		let parameterEncoding = encoding ?? URLEncoding.default

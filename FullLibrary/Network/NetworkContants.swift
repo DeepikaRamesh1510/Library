@@ -8,7 +8,7 @@
 
 // to use the add, modify and delete a review we need to register our application with the good reads
 
-import Foundation
+import UIKit
 
 typealias QueryParameter = [ String: String]
 
@@ -24,7 +24,9 @@ class GoodReadsBook {
 	var synopsis = String()
 	var title = String()
 	var authorName = String()
-	var imageUrl = Data()
+	var imageUrl = String()
+	var image = UIImage()
+	var rating = Float()
 }
 
 struct GoodReadsConstants {
@@ -35,9 +37,10 @@ struct GoodReadsConstants {
 		case booksOfAuthor = "author/list.xml"  //xml response
 		case getAuthorByName = "api/author_url" // ''
 		case getBookIDByISBN = "book/isbn_to_id " //xml response
-		case getBookReviewWithBookId = "book/show" // '/show/bookID.format' -> this should be followed by the book id and the format in which we require the results to be in
+		case getBookDescriptionWithBookId = "book/show" // '/show/bookID.format' -> this should be followed by the book id and the format in which we require the results to be in
 		case getBookReviewWithISBN = "book/isbn/" //  'isbn/ISBN?format=FORMAT' -> this api fetches the review for a book based on the isbn given, we can choose the format in which we require the results to be
 		case searchBooksWithNameAuthorISBN = "search/index.xml" // specify the query string in the parameter with the key 'q'
+		case getBookDescriptionAlongWithReview = ""
 	}
 	func getEndPoint(path: Path) -> String {
 		return goodReadsBaseUrl + path.rawValue

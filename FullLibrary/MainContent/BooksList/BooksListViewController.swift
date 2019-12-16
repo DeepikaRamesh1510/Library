@@ -17,9 +17,9 @@ class BooksListViewController: UIViewController {
 	var goodReadsBooks = [GoodReadsBook]()
 	var myLibraryBooks = [Book]()
 	var libraryState: LibraryState = .myLibrary
-	//	var books = [Any]()
 	var xmlParser: XMLParser?
 	var searchText = ""
+//	var previousIndex = 0
 	
 	func getTheBooks(){
 		guard let result = ManageBooks.shared.fetchBooks() else {
@@ -37,13 +37,14 @@ class BooksListViewController: UIViewController {
 		present(bookViewController, animated: true, completion: nil)
 	}
 	
-	func changeSelectedSegmentColor() {
-		if #available(iOS 13.0, *) {
-			segmentedControl.selectedSegmentTintColor = UIColor.systemYellow
-			//return
-		}
-		segmentedControl?.tintColor = UIColor.systemYellow
-	}
+//	func changeSelectedSegmentColor() {
+//		if #available(iOS 13.0, *) {
+//			segmentedControl.selectedSegmentTintColor = UIColor.systemYellow
+//			segmentedControl.isMomentary = false
+//			
+//		}
+//		segmentedControl?.tintColor = UIColor.systemYellow
+//	}
 	
 	func clearSearchBarContent() {
 		self.searchBar.text = ""
@@ -55,9 +56,13 @@ class BooksListViewController: UIViewController {
 		switch segmentedControl.selectedSegmentIndex {
 			case 0:
 				libraryState = .goodReads
+//				previousIndex = 1
+//				changeSelectedSegmentColor()
 			case 1:
 				libraryState = .myLibrary
 				getTheBooks()
+//				previousIndex = 0
+//				changeSelectedSegmentColor()
 			default:
 				print("Nothing is selected")
 		}

@@ -22,14 +22,15 @@ class BookTableViewCell: UITableViewCell {
     }
 
 	@IBAction func presentModalToAddBookToMyLibrary(_ sender: Any) {
-		let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-		guard let bookViewController = storyBoard.instantiateViewController(withIdentifier: ViewController.bookViewController.rawValue) as? BookViewController else {
-			print("Failed to instantiate Book view controller!")
-			return
-		}
-		bookViewController.modalPresentationStyle = .popover
-		parentViewController?.present(bookViewController, animated: true, completion: nil)
+//		let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+//		guard let bookViewController = storyBoard.instantiateViewController(withIdentifier: ViewController.bookViewController.rawValue) as? BookViewController else {
+//			print("Failed to instantiate Book view controller!")
+//			return
+//		}
+//		bookViewController.modalPresentationStyle = .popover
+//		parentViewController?.present(bookViewController, animated: true, completion: nil)
 	}
+	
 	override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

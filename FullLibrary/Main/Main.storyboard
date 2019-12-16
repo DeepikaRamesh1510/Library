@@ -135,23 +135,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LnC-Ma-NSb">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="IUQ-IO-zwx"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Good Reads"/>
-                                    <segment title="My Library"/>
-                                </segments>
-                                <color key="selectedSegmentTintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="libraryChanged:" destination="skT-Z0-zTA" eventType="valueChanged" id="DU5-jD-7vp"/>
-                                </connections>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bXk-gJ-OJ0">
-                                <rect key="frame" x="0.0" y="96" width="375" height="522"/>
+                                <rect key="frame" x="0.0" y="100" width="375" height="518"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" rowHeight="107" id="AYe-fl-dAC" customClass="BookTableViewCell" customModule="FullBooks" customModuleProvider="target">
@@ -161,7 +146,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HKV-TG-IXP">
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HKV-TG-IXP">
                                                     <rect key="frame" x="25" y="16" width="325" height="75"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="FnW-ao-NZO">
@@ -172,7 +157,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="PDp-SC-5kP">
-                                                            <rect key="frame" x="75" y="1" width="235" height="73"/>
+                                                            <rect key="frame" x="85" y="1" width="215" height="73"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGn-fw-9jc">
                                                                     <rect key="frame" x="0.0" y="0.0" width="33.5" height="17"/>
@@ -280,7 +265,10 @@
                                 </prototypes>
                             </tableView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="search title, author " translatesAutoresizingMaskIntoConstraints="NO" id="t1M-pV-paV">
-                                <rect key="frame" x="0.0" y="40" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="ATD-8B-DFy"/>
+                                </constraints>
                                 <color key="barTintColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                 <scopeButtonTitles>
@@ -288,19 +276,34 @@
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="LnC-Ma-NSb">
+                                <rect key="frame" x="0.0" y="60" width="375" height="41"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="IUQ-IO-zwx"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Good Reads"/>
+                                    <segment title="My Library"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="libraryChanged:" destination="skT-Z0-zTA" eventType="valueChanged" id="DU5-jD-7vp"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="t1M-pV-paV" firstAttribute="top" secondItem="LnC-Ma-NSb" secondAttribute="bottom" id="5ex-md-bBJ"/>
-                            <constraint firstItem="t1M-pV-paV" firstAttribute="leading" secondItem="kTu-q3-eJd" secondAttribute="leading" id="5oC-fb-nEy"/>
-                            <constraint firstItem="bXk-gJ-OJ0" firstAttribute="leading" secondItem="kTu-q3-eJd" secondAttribute="leading" id="6SL-Ud-Yx9"/>
-                            <constraint firstItem="LnC-Ma-NSb" firstAttribute="top" secondItem="kTu-q3-eJd" secondAttribute="top" id="I1x-qZ-hcs"/>
-                            <constraint firstItem="bXk-gJ-OJ0" firstAttribute="top" secondItem="t1M-pV-paV" secondAttribute="bottom" id="PAL-pI-vOs"/>
-                            <constraint firstItem="LnC-Ma-NSb" firstAttribute="trailing" secondItem="kTu-q3-eJd" secondAttribute="trailing" id="V9u-wI-0Tq"/>
-                            <constraint firstItem="t1M-pV-paV" firstAttribute="trailing" secondItem="kTu-q3-eJd" secondAttribute="trailing" id="Vfe-DU-YeU"/>
-                            <constraint firstItem="LnC-Ma-NSb" firstAttribute="leading" secondItem="kTu-q3-eJd" secondAttribute="leading" id="c4I-GE-XaY"/>
-                            <constraint firstItem="kTu-q3-eJd" firstAttribute="bottom" secondItem="bXk-gJ-OJ0" secondAttribute="bottom" id="f5h-Px-mjR"/>
-                            <constraint firstItem="kTu-q3-eJd" firstAttribute="trailing" secondItem="bXk-gJ-OJ0" secondAttribute="trailing" id="wa9-2A-WMn"/>
+                            <constraint firstItem="LnC-Ma-NSb" firstAttribute="trailing" secondItem="kTu-q3-eJd" secondAttribute="trailing" id="1sK-yt-sUO"/>
+                            <constraint firstItem="LnC-Ma-NSb" firstAttribute="leading" secondItem="kTu-q3-eJd" secondAttribute="leading" id="31z-LI-W2Q"/>
+                            <constraint firstItem="LnC-Ma-NSb" firstAttribute="top" secondItem="t1M-pV-paV" secondAttribute="bottom" id="5AL-Nd-IEX"/>
+                            <constraint firstItem="kTu-q3-eJd" firstAttribute="trailing" secondItem="bXk-gJ-OJ0" secondAttribute="trailing" id="6aU-ej-8eC"/>
+                            <constraint firstItem="t1M-pV-paV" firstAttribute="leading" secondItem="kTu-q3-eJd" secondAttribute="leading" id="8mC-Rc-qcP"/>
+                            <constraint firstItem="t1M-pV-paV" firstAttribute="top" secondItem="kTu-q3-eJd" secondAttribute="top" id="WJS-e6-glA"/>
+                            <constraint firstItem="bXk-gJ-OJ0" firstAttribute="top" secondItem="LnC-Ma-NSb" secondAttribute="bottom" id="Xwl-99-8RM"/>
+                            <constraint firstItem="kTu-q3-eJd" firstAttribute="bottom" secondItem="bXk-gJ-OJ0" secondAttribute="bottom" id="eoi-f8-vaP"/>
+                            <constraint firstItem="t1M-pV-paV" firstAttribute="trailing" secondItem="kTu-q3-eJd" secondAttribute="trailing" id="fg7-Rr-xih"/>
+                            <constraint firstItem="bXk-gJ-OJ0" firstAttribute="leading" secondItem="kTu-q3-eJd" secondAttribute="leading" id="t33-yh-2OT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kTu-q3-eJd"/>
                     </view>
@@ -314,7 +317,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gm-2f-bAM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-676" y="-315"/>
+            <point key="canvasLocation" x="-676" y="-315.29235382308849"/>
         </scene>
         <!--Book Detail View Controller-->
         <scene sceneID="vxf-0u-EeX">

@@ -26,10 +26,16 @@ class GoodReadsNetworkRequest {
 	func fetchBooks(bySearch searchString: String, completionHandler: @escaping (Data?,Error?) -> Void) {
         parameters["q"] = searchString
 		networkManager.getRequest(url: goodReadsConstants.getEndPoint(path: .searchBooksWithNameAuthorISBN), encoding: nil, parameters: parameters, headers: nil, completionHandler: completionHandler)
+		clearParameter()
 	}
 	
-	func fetchBookImage(imageURL: String) {
-		
+	func fetchSynopsis(bookId: String, completionHandler: @escaping (Data?, Error?) -> Void) {
+		networkManager.getRequest(url: goodReadsConstants.getEndPoint(path: .getBookDescriptionWithBookId) + "\(bookId).xml", encoding: nil, parameters: nil, headers: nil, completionHandler: completionHandler)
+		clearParameter()
 	}
-//	return results
+	
+	func fetchBookImage(imageURL: String, completionHandler: @escaping (Data?,Error?) -> Void ) {
+//		networkManager.downloadFile(fileURL: imageURL, completionHandler: completionHandler)
+		networkManager.getRequest(url: imageURL, encoding: nil, parameters: nil, headers: nil, completionHandler: completionHandler)
+	}
 }

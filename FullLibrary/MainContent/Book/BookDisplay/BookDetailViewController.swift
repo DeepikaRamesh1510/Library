@@ -14,13 +14,45 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 	@IBOutlet var author: UILabel!
 	@IBOutlet var synopsis: UITextView!
 	@IBOutlet var genreAndNoOfPages: UILabel!
-	var book: Book?
+	var myLibraryBook: Book?
+	var goodReadsBook: GoodReadsBook?
+	var libraryState: LibraryState = .myLibrary
 	var bookUpdationDelegate: BookUpdationProtocol?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		performNavigationBarViewChanges()
 		updatePageWithContents()
+	}
+	
+	func checkForSynopsis() {
+		var bookId: String
+		if libraryState == .myLibrary {
+			guard let synopsisOfBook = myLibraryBook?.synopsis, synopsisOfBook.length > 0 else {
+				return
+			}
+			bookId = myLibraryBook?.bookId ?? ""
+		} else {
+			guard let synopsis = goodReadsBook?.synopsis, synopsis.length > 0 else {
+				return
+			}
+			bookId = goodReadsBook?.bookId ?? ""
+		}
+		guard bookId.length > 0 else {
+			return
+		}
+		GoodReadsNetworkRequest.shared.fetchSynopsis(bookId: bookId) { (data,error) in
+			if let error = error {
+				print(error.localizedDescription)
+				return
+			}
+			guard let data = data else {
+				print("Data not received!")
+				return
+			}
+			let xmlParser = XMLResponseParser()
+			self.synopsis.text = xmlParser.parseSynopsis(xmlData: data)
+		}
 	}
 	
 	func performNavigationBarViewChanges() {
@@ -38,30 +70,38 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 			print("Failed to instantiate static table content viwe controller")
 			return
 		}
-		staticTable.book = book
+		staticTable.book = myLibraryBook
 		staticTable.flowState = .update
 		staticTable.bookUpdationDelegate = self
-//		let appDelegate = UIApplication.shared.delegate as? AppDelegate
-//		appDelegate?.floatingButtonController?.isVisible = false
+		//		let appDelegate = UIApplication.shared.delegate as? AppDelegate
+		//		appDelegate?.floatingButtonController?.isVisible = false
 		present(bookViewController, animated: true, completion: nil)
 	}
 	func performUpdateAction(book: Book) {
-		self.book = book
+		self.myLibraryBook = book
 		updatePageWithContents()
 		bookUpdationDelegate?.performUpdateAction(book: book)
 	}
 	
 	func updatePageWithContents() {
-		bookTitle.text = book?.title
-		author.text = book?.authorName
-		synopsis.text = book?.synopsis ?? "Sysnopsis is not provided for this book"
-//		let genre = (book?.genre ?? "" ).isEmpty ? "Genre not specicfied" : book?.genre!
-		let noOfPages = book?.noOfPages ?? 0
-		if let genre = book?.genre, genre.isNotEmpty {
-			genreAndNoOfPages.text = "\(genre) | \(noOfPages) Pages"
-		} else {
-			 genreAndNoOfPages.text = "Genre not specicfied | \(noOfPages) Pages"
-		}
-			
+		
+		libraryState == .myLibrary ? updateBookDetails(title: myLibraryBook?.title, author: myLibraryBook?.authorName, synopsis: myLibraryBook?.synopsis) : updateBookDetails(title: goodReadsBook?.title, author: goodReadsBook?.authorName, synopsis: goodReadsBook?.synopsis)
+		//		bookTitle.text = book?.title
+		//		author.text = book?.authorName
+		//		synopsis.text = book?.synopsis ?? "Sysnopsis is not provided for this book"
+		//		let genre = (book?.genre ?? "" ).isEmpty ? "Genre not specicfied" : book?.genre!
+		//		let noOfPages = book?.noOfPages ?? 0
+		//		if let genre = book?.genre, genre.isNotEmpty {
+		//			genreAndNoOfPages.text = "\(genre) | \(noOfPages) Pages"
+		//		} else {
+		//			 genreAndNoOfPages.text = "Genre not specicfied | \(noOfPages) Pages"
+		//		}
+		
+	}
+	
+	func updateBookDetails(title: String?, author: String?, synopsis: String?) {
+		self.bookTitle.text = title
+		self.author.text = author
+		self.synopsis.text = synopsis
 	}
 }

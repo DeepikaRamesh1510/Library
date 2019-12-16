@@ -18,16 +18,7 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 		assignDelegatePropertiesValue()
 		tableAndKeyboardViewChanges()
 		renderingSearchBar()
-		renderingSegmentedControl()
 		renderViewAccordingToLibraryState()
-	}
-	
-	func renderingSegmentedControl() {
-		if #available(iOS 13.0, *) {
-			segmentedControl.selectedSegmentTintColor = UIColor.systemYellow
-		}
-		segmentedControl.tintColor = UIColor.systemYellow
-
 	}
 	
 	func renderViewAccordingToLibraryState() {
@@ -54,17 +45,6 @@ extension BooksListViewController: UITableViewDelegate, UITableViewDataSource, U
 	func peformNavigationViewChanges() {
 		self.tabBarController?.navigationItem.title = "Books"
 	}
-	
-//		func performUpdateAction(book: Book) {
-//			guard let indexToBeUpdated = myLibraryBooks.firstIndex(where:{ (bookInArray) -> Bool in
-//	//			bookInArray.isbn == book.isbn
-//			}) else {
-//				return
-//			}
-//			myLibraryBooks[indexToBeUpdated] = book
-//			tableView.reloadData()
-//		}
-	
 	
 	// MARK: BookProtocol conformation
 	

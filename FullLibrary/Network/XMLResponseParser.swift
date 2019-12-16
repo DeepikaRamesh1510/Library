@@ -18,15 +18,28 @@ class XMLResponseParser: NSObject, XMLParserDelegate {
 	var authorName = ""
 	var synopsis = ""
 	var imageURL = ""
+	var rating = ""
 	var imageData: UIImage?
 	
 	//MARK: Serializing the XML Data
 	
-	func parseTheXMLData(xmlData: Data) -> [GoodReadsBook] {
+	func initializeParser(xmlData: Data) {
 		xmlParser = XMLParser(data: xmlData)
 		xmlParser?.delegate = self
 		xmlParser?.parse()
+	}
+	
+	func parseTheXMLData(xmlData: Data) -> [GoodReadsBook] {
+		initializeParser(xmlData: xmlData)
+//		xmlParser = XMLParser(data: xmlData)
+//		xmlParser?.delegate = self
+//		xmlParser?.parse()
 		return books
+	}
+	
+	func parseSynopsis(xmlData: Data) -> String {
+		initializeParser(xmlData: xmlData)
+		return synopsis
 	}
 	
 	func parserDidStartDocument(_ parser: XMLParser) {
@@ -46,6 +59,8 @@ class XMLResponseParser: NSObject, XMLParserDelegate {
 				self.id += data
 			} else if self.elementName == "small_image_url" {
 				self.imageURL += data
+			} else if self.elementName == "average_rating" {
+				self.imageURL += data
 			}
 		}
 	}
@@ -57,6 +72,9 @@ class XMLResponseParser: NSObject, XMLParserDelegate {
 			self.synopsis = ""
 			self.id = ""
 			self.imageURL = ""
+			self.rating = ""
+		} else if elementName == "description" {
+			self.synopsis = ""
 		}
 		self.elementName = elementName
 	}
@@ -67,19 +85,19 @@ class XMLResponseParser: NSObject, XMLParserDelegate {
 			tempBook.bookId = self.id;
 			tempBook.authorName = self.authorName;
 			tempBook.title = self.title;
+			tempBook.rating = Float(self.rating) ?? 0.0
+			tempBook.imageUrl = self.imageURL
 			print(tempBook)
 			self.books.append(tempBook);
 		}
 	}
 	
-	func parserDidEndDocument(_ parser: XMLParser) {
-		print("Here we should have func to ")
-	}
+//	func parserDidEndDocument(_ parser: XMLParser) {
+//		print("Here we should have func to ")
+//	}
 	
 	// functtion to fetch the image for the books
-	func getImageForBooks(completionHandler: @escaping (GoodReadsBook) -> Void) {
-		
-	}
+	
 	
 }
 

@@ -40,3 +40,35 @@ extension UIViewController {
 		self.present(alert, animated: true, completion: nil)
 	}
 }
+
+extension UIColor {
+    func image(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { rendererContext in
+            self.setFill()
+            rendererContext.fill(CGRect(origin: .zero, size: size))
+        }
+    }
+}
+
+extension UIImage {
+//	 convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+//		   let rect = CGRect(origin: .zero, size: size)
+//		   UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+//		   color.setFill()
+//		   UIRectFill(rect)
+//		   let image = UIGraphicsGetImageFromCurrentImageContext()
+//		   UIGraphicsEndImageContext()
+//
+//		guard let cgImage = image?.cgImage else { return nil }
+//		self(cgImage: cgImage)
+//	   }
+//	static func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
+//		let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+//		UIGraphicsBeginImageContextWithOptions(size, false, 0)
+//		color.setFill()
+//		UIRectFill(rect)
+//		let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+//		UIGraphicsEndImageContext()
+//		return image
+//	}
+}
