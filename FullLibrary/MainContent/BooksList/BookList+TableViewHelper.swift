@@ -9,7 +9,7 @@
 import UIKit
 
 extension BooksListViewController {
-	
+	//MARK: helper methods for cell and table modification according to library state and the book count
 	func modifyBookCellByState(title: String, author: String) -> BookTableViewCell {
 		let bookCell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookTableViewCell
 		bookCell.title.text = title
@@ -34,6 +34,25 @@ extension BooksListViewController {
 		}
 	}
 	
+	func deleteBookFromMyLibrary(isbn: String?, indexPath: IndexPath) {
+		var isDeleted: Bool = true
+		guard let bookISBN = isbn else {
+			showToast(message: "Deletion Failed!")
+			return
+		}
+		ManageBooks.shared.deleteBook(isbn: bookISBN) { (error) in
+			self.showToast(message: error.errorType.rawValue)
+			isDeleted = false
+			return
+		}
+		guard isDeleted else {
+			return
+		}
+		self.myLibraryBooks.remove(at: indexPath.row)
+		tableView.deleteRows(at: [indexPath], with: .fade)
+		print(indexPath.item)
+	}
+	
 	//MARK: table view delegate methods
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,26 +70,8 @@ extension BooksListViewController {
 	}
 	
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		if libraryState == .myLibrary {
-			if editingStyle == .delete {
-				var isDeleted: Bool = true
-				guard let bookISBN = myLibraryBooks[indexPath.item].isbn else {
-					showToast(message: "Deletion Failed!")
-					return
-				}
-				ManageBooks.shared.deleteBook(isbn: bookISBN) { (error) in
-					self.showToast(message: error.errorType.rawValue)
-					isDeleted = false
-					return
-				}
-				guard isDeleted else {
-					return
-				}
-				self.myLibraryBooks.remove(at: indexPath.row)
-				tableView.deleteRows(at: [indexPath], with: .fade)
-				print(indexPath.item)
-				
-			}
+		if libraryState == .myLibrary && editingStyle == .delete{
+			deleteBookFromMyLibrary(isbn: myLibraryBooks[indexPath.item].isbn, indexPath: indexPath)
 		}
 		
 	}
