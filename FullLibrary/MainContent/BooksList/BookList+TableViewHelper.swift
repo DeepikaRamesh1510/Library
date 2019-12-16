@@ -10,6 +10,16 @@ import UIKit
 
 extension BooksListViewController {
 	
+	func modifyBookCellByState(title: String, author: String) -> BookTableViewCell {
+		let bookCell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookTableViewCell
+		bookCell.title.text = title
+		bookCell.author.text = author
+		bookCell.parentViewController = self
+		bookCell.addBookButton.isEnabled = libraryState == .goodReads ? true : false
+		bookCell.addBookButton.isHidden = libraryState == .goodReads ? false : true
+		return bookCell
+	}
+	
 	//MARK: table view delegate methods
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,22 +40,10 @@ extension BooksListViewController {
 		}
 		
 		func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-			let bookCell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookTableViewCell
-			if libraryState == .myLibrary {
-				bookCell.title.text = myLibraryBooks[indexPath.item].title
-				bookCell.author.text = myLibraryBooks[indexPath.item].authorName
-				bookCell.parentViewController = self
-				bookCell.addBookButton.isEnabled = false
-				bookCell.addBookButton.isHidden = true
-				return bookCell
-			} else {
-				bookCell.title.text = goodReadsBooks[indexPath.item].title
-				bookCell.author.text = goodReadsBooks[indexPath.item].authorName
-				bookCell.parentViewController = self
-				bookCell.addBookButton.isEnabled = true
-				bookCell.addBookButton.isHidden = false
-				return bookCell
+			guard libraryState == .goodReads  else {
+				 return modifyBookCellByState(title: myLibraryBooks[indexPath.item].title ?? "", author: myLibraryBooks[indexPath.item].authorName ?? "")
 			}
+			return modifyBookCellByState(title: goodReadsBooks[indexPath.item].title, author: goodReadsBooks[indexPath.item].authorName)
 		}
 		
 		func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
