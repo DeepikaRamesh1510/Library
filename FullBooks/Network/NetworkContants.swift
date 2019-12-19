@@ -27,6 +27,7 @@ class GoodReadsBook {
 	var imageUrl = String()
 	var image = Data()
 	var rating = Float()
+	var noOfCopies = Int16()
 }
 
 struct GoodReadsConstants {

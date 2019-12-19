@@ -11,9 +11,10 @@ import UIKit
 
 class BooksListViewController: UIViewController {
 	
-	@IBOutlet var searchBar: UISearchBar!
-	@IBOutlet var tableView: UITableView!
-	@IBOutlet var segmentedControl: UISegmentedControl!
+	@IBOutlet weak var searchBar: UISearchBar!
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var segmentedControl: UISegmentedControl!
+	var booksManager: BooksManager?
 	var goodReadsBooks = [GoodReadsBook]()
 	var myLibraryBooks = [Book]()
 	var libraryState: LibraryState = .myLibrary
@@ -21,7 +22,6 @@ class BooksListViewController: UIViewController {
 	var searchText = ""
 	var currentPage : Int = 1
 	var isLoadingList : Bool = false
-//	var previousIndex = 0
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -30,10 +30,19 @@ class BooksListViewController: UIViewController {
 		tableAndKeyboardViewChanges()
 		renderingSearchBar()
 		renderViewAccordingToLibraryState()
+		
+	}
+	
+	func initializeTheBookManager() {
+		guard let rootNavigationController = self.navigationController as? RootNavigationController else {
+			print("rootNavigationController not available!")
+			return
+		}
+		booksManager = BooksManager(dataManager: rootNavigationController.dataManager)
 	}
 	
 	func getTheBooks(){
-		guard let result = ManageBooks.shared.fetchBooks() else {
+		guard let result = booksManager?.fetchBooks() else {
 			print("Unable to fetch data!")
 			return
 		}
@@ -97,12 +106,17 @@ class BooksListViewController: UIViewController {
 	
 	func fetchBooksInMyLibrary(bySearch: String) {
 		if searchText.isEmpty {
-			guard let allBooks = ManageBooks.shared.fetchBooks() else {
+			guard let allBooks = booksManager?.fetchBooks() else {
 				return
 			}
 			self.myLibraryBooks = allBooks
 		} else {
-			self.myLibraryBooks += ManageBooks.shared.fetchBooksBasedOnSearch(by: searchText)
+			
+			guard let books = booksManager?.fetchBooksBasedOnSearch(by: searchText) else {
+				print("Unable to fetch the books!")
+				return
+			}
+			self.myLibraryBooks += books
 		}
 		self.tableView.reloadData()
 	}

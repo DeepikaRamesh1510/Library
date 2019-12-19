@@ -8,10 +8,14 @@
 
 import Foundation
 
-
 enum FlowState {
     case update
     case create
+}
+
+enum CoreDataEntity: String {
+	case books = "Book"
+	case user = "User"
 }
 
 enum LibraryState: Int {

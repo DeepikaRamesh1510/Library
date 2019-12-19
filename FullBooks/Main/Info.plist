@@ -26,6 +26,14 @@
 				<string>com.fullcreative.fullbooks://oauth2callback</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.815573621228-pb8lfr4gg2bsl02aqma64emd6kstd6iu</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

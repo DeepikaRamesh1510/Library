@@ -48,7 +48,7 @@ extension BooksListViewController: UITableViewDelegate , UITableViewDataSource {
 			showToast(message: "Deletion Failed!")
 			return
 		}
-		ManageBooks.shared.deleteBook(bookId: bookId) { (error) in
+		booksManager?.deleteBook(bookId: bookId) { (error) in
 			guard let error = error else {
 				return
 			}

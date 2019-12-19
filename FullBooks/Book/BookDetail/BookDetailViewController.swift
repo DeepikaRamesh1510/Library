@@ -10,37 +10,58 @@ import UIKit
 
 class BookDetailViewController: UIViewController, BookUpdationProtocol {
 	
-	@IBOutlet var addToLibraryButtonContainer: UIView!
-	@IBOutlet var bookImage: UIImageView!
-	@IBOutlet var bookTitle: UILabel!
-	@IBOutlet var author: UILabel!
-	@IBOutlet var synopsis: UITextView!
-	@IBOutlet var genreAndNoOfPages: UILabel!
-	@IBOutlet var numberOfBooks: UITextField!
-	@IBOutlet var numberOfBooksStepper: UIStepper!
+	//	@IBOutlet var addToLibraryButtonContainer: UIView!
+	@IBOutlet weak var bookImage: UIImageView!
+	@IBOutlet weak var bookTitle: UILabel!
+	@IBOutlet weak var author: UILabel!
+	@IBOutlet weak var synopsis: UITextView!
+	@IBOutlet weak var genreAndNoOfPages: UILabel!
+	@IBOutlet weak var numberOfBooks: UITextField!
+	@IBOutlet weak var numberOfBooksStepper: UIStepper!
 	var myLibraryBook: Book?
 	var goodReadsBook: GoodReadsBook?
 	var libraryState: LibraryState = .myLibrary
 	var bookUpdationDelegate: BookUpdationProtocol?
+	var booksManager: BooksManager?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		performNavigationBarViewChanges()
 		updatePageWithContents()
 		checkForSynopsis()
+		numberOfBooksStepper.minimumValue = 1
+		initializeTheBookManager()
+	}
+	
+	func initializeTheBookManager() {
+		guard let rootNavigationController = self.navigationController as? RootNavigationController else {
+			print("rootNavigationController not available!")
+			return
+		}
+		booksManager = BooksManager(dataManager: rootNavigationController.dataManager)
 	}
 	
 	@IBAction func addBooksToLibrary(_ sender: Any) {
+		guard let booksManager = booksManager else {
+			print("Bookk manager is not initialized !")
+			return
+		}
 		guard let goodReadsBook = goodReadsBook else {
 			print("Didn't receive a good read book!")
 			return
 		}
-		guard let numberOfCopies = numberOfBooks.text?.toInt16, numberOfCopies > 1 else {
+		guard let numberOfCopiesString = numberOfBooks.text, let numberOfCopies = numberOfCopiesString.toInt16, numberOfCopies > 0 else {
 			let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
 			self.showAlert(title: "Alert", message: "The number of copies should always be greater than 1", actions: [okAction])
 			return
 		}
-		ManageBooks.shared.insertNewBook(title: goodReadsBook.title, author: goodReadsBook.authorName, bookId: goodReadsBook.bookId, noOfPages: 0, synopsis: goodReadsBook.synopsis, genre: nil, imageData: goodReadsBook.image, rating: goodReadsBook.rating, numberOfCopies: numberOfCopies) { (error) in
+		// checking whether the book is already available
+		if booksManager.isBookAvailable(bookId: goodReadsBook.bookId) {
+			let okAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+			self.showAlert(title: "Alert", message: "A book with same BookID already exists!", actions: [okAlertAction])
+			return
+		}
+		booksManager.insertNewBook(title: goodReadsBook.title, author: goodReadsBook.authorName, bookId: goodReadsBook.bookId, noOfPages: 0, synopsis: goodReadsBook.synopsis, genre: nil, imageData: goodReadsBook.image, rating: goodReadsBook.rating, numberOfCopies: numberOfCopies) { (error) in
 			guard let error = error else {
 				self.showToast(message: "Book added to library!")
 				self.dismissViewController()
@@ -75,9 +96,9 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 				return
 			}
 			let xmlParser = XMLResponseParser()
-//			DispatchQueue.main.async {
-				self.synopsis.text = xmlParser.parseSynopsis(xmlData: data)
-//			}
+			//			DispatchQueue.main.async {
+			self.synopsis.text = xmlParser.parseSynopsis(xmlData: data)
+			//			}
 			
 		}
 	}
@@ -90,6 +111,13 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 		}
 		let navigationTitle = libraryState == .myLibrary ? myLibraryBook?.title : goodReadsBook?.title
 		navigationController?.changeNavigationBarContent(target: self,title: navigationTitle ?? "Book Detail", rightBarButton: updateButton)
+	}
+	func checkForAnyChanges() -> Bool {
+		guard let booksManager = booksManager else {
+			print("book manager is not initialized!")
+			return false
+		}
+		return booksManager.checkForChanges()
 	}
 	
 	@objc func presentUpdateViewController(_ sender: UIBarButtonItem) {
@@ -113,14 +141,15 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 	}
 	
 	func updatePageWithContents() {
-		libraryState == .myLibrary ? updateBookDetails(title: myLibraryBook?.title, author: myLibraryBook?.authorName, synopsis: myLibraryBook?.synopsis,imageData: myLibraryBook?.image) : updateBookDetails(title: goodReadsBook?.title, author: goodReadsBook?.authorName, synopsis: goodReadsBook?.synopsis, imageData: goodReadsBook?.image)
+		libraryState == .myLibrary ? updateBookDetails(title: myLibraryBook?.title, author: myLibraryBook?.authorName, synopsis: myLibraryBook?.synopsis, numberOfBooks: myLibraryBook?.noOfCopies,imageData: myLibraryBook?.image) : updateBookDetails(title: goodReadsBook?.title, author: goodReadsBook?.authorName, synopsis: goodReadsBook?.synopsis, numberOfBooks: goodReadsBook?.noOfCopies, imageData: goodReadsBook?.image)
 		
 	}
 	
-	func updateBookDetails(title: String?, author: String?, synopsis: String?, imageData: Data?) {
+	func updateBookDetails(title: String?, author: String?, synopsis: String?, numberOfBooks: Int16?, imageData: Data?) {
 		self.bookTitle.text = title
 		self.author.text = author
 		self.synopsis.text = synopsis
+		self.numberOfBooks.text = String(numberOfBooks ?? 1)
 		if let imageData = imageData {
 			self.bookImage.image = UIImage(data: imageData)
 		} else {
@@ -128,4 +157,9 @@ class BookDetailViewController: UIViewController, BookUpdationProtocol {
 		}
 		
 	}
+	
+	
+//	@IBAction func stepperClicked(_ sender: Any) {
+//		numberOfBooksStepper.
+//	}
 }

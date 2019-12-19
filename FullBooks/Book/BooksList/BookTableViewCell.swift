@@ -10,10 +10,10 @@ import UIKit
 
 class BookTableViewCell: UITableViewCell {
 
-    @IBOutlet var bookImage: UIImageView!
-	@IBOutlet var addBookButton: UIButton!
-    @IBOutlet var title: UILabel!
-    @IBOutlet var author: UILabel!
+    @IBOutlet weak var bookImage: UIImageView!
+	@IBOutlet weak var addBookButton: UIButton!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var author: UILabel!
 	var parentViewController: UIViewController?
     override func awakeFromNib() {
         super.awakeFromNib()

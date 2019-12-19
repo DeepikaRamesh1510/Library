@@ -14,6 +14,7 @@ extension BooksListViewController {
 	
 	func renderViewAccordingToLibraryState() {
 		if libraryState == .myLibrary {
+			initializeTheBookManager()
 			getTheBooks()
 		}
 	}

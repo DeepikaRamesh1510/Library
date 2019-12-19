@@ -9,6 +9,7 @@
 import Foundation
 
 class GoodReadsNetworkRequest {
+	
 	static let shared = GoodReadsNetworkRequest()
 	let networkManager = NetworkManager()
 	let goodReadsConstants = GoodReadsConstants()

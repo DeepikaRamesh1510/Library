@@ -10,10 +10,10 @@ import UIKit
 
 class BookViewController: UIViewController {
 	
-	@IBOutlet var bookViewBackButton: UIButton!
-	@IBOutlet var bookViewTitle: UILabel!
-	@IBOutlet var staticTableContainer: UIView!
-	@IBOutlet var saveButton: UIButton!
+	@IBOutlet weak var bookViewBackButton: UIButton!
+	@IBOutlet weak var bookViewTitle: UILabel!
+	@IBOutlet weak var staticTableContainer: UIView!
+	@IBOutlet weak var saveButton: UIButton!
 	var bookStaticTableController: BookStaticTableViewController?
 	var addBookToListDelegate: BookProtocol?
 	var bookUpdationDelegate: BookUpdationProtocol?
@@ -32,24 +32,24 @@ class BookViewController: UIViewController {
 	}
 	
 	@IBAction func closeTheViewController(_ sender: Any) {
-		guard checkForAnyChanges() else {
-			self.dismissBookView()
-			return
-		}
-		let confirmAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
-			self.dismissBookView()
-		}
-		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-		showAlert(title: "Alert", message: "Do you want to dicard the changes?", actions: [cancelAction,confirmAction])
+//		guard checkForAnyChanges() else {
+//			self.dismissBookView()
+//			return
+//		}
+//		let confirmAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
+//			self.dismissBookView()
+//		}
+//		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//		showAlert(title: "Alert", message: "Do you want to dicard the changes?", actions: [cancelAction,confirmAction])
 	}
 	
 	func dismissBookView() {
 		self.dismissViewController()
 	}
 	
-	func checkForAnyChanges() -> Bool {
-		return ManageBooks.shared.checkForChanges()
-	}
+//	func checkForAnyChanges() -> Bool {
+//		return ManageBooks.shared.checkForChanges()
+//	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == ContainerSegue.bookStaticTable.rawValue {

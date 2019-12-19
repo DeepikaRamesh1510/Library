@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 import CoreData
 
-class ManageBooks {
-    
-    static let shared = ManageBooks()
-    init() {}
-    
-    lazy var dataManager = DataManager()
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Book")
-    
+class BooksManager {
+	var dataManager : DataManager
+
+	init(dataManager: DataManager) {
+		self.dataManager = dataManager
+	}
+	
+	let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntity.books.rawValue)
 	
 	func isBookAvailable(bookId: String) -> Bool {
 		guard let _ = fetchParticularBook(bookId: bookId) else {
@@ -44,7 +44,6 @@ class ManageBooks {
 		dataManager.saveContext(errorHandler: errorHandler)
 		return book
     }
-    
     
     func fetchBooks() -> [Book]? {
         do {

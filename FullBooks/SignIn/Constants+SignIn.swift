@@ -11,6 +11,26 @@ import Foundation
 
 
 let session = URLSession.shared
+let userDefault = UserDefaults.standard
+let userDetail = "userDetail"
+let isLoggedIn = "isLoggedIn"
+
+enum KeyChainKey: String {
+	case accessToken
+	case refreshToken
+}
+//enum UserDefaultKey: String {
+//	case isLoggedIn
+//	case userName
+//	case emailId
+//}
+//enum GoogleURL: String{
+//}
+
+struct GoogleOAuthInstance {
+	let clientID = "815573621228-pb8lfr4gg2bsl02aqma64emd6kstd6iu.apps.googleusercontent.com"
+	let reveresedClientID = "com.googleusercontent.apps.815573621228-pb8lfr4gg2bsl02aqma64emd6kstd6iu"
+}
 
 struct OAuthInstance {
     let clientID = "23703-a89f03d3af0eeac138fe"
