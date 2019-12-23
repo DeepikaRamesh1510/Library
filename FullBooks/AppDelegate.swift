@@ -42,15 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        return false
 //    }
 	
-	@objc func presentBookViewController() {
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		guard let bookViewController = storyboard.instantiateViewController(withIdentifier: ViewController.bookViewController.rawValue) as? BookViewController else {
-			print("Failed to open!")
-			return
-		}
-//		floatingButtonController?.isVisible = false
-		window?.rootViewController?.present(bookViewController, animated: true, completion: nil)
-	}
 
 }
     

@@ -3,7 +3,7 @@
 
 target 'FullLibrary' do
 	
-	pod  'FullAuthIOSClient',:git => 'https://github.com/FullCreative/fullauth-api-ios-client.git',:branch => 'dev_Sathish_WebView'
+#	pod  'FullAuthIOSClient',:git => 'https://github.com/FullCreative/fullauth-api-ios-client.git',:branch => 'dev_Sathish_WebView'
 	pod 'GoogleSignIn'
 	pod 'SwiftKeychainWrapper'
 	

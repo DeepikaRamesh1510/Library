@@ -13,9 +13,9 @@ enum FlowState {
     case create
 }
 
-enum CoreDataEntity: String {
+enum CoreDataEntity: String, CaseIterable {
 	case books = "Book"
-	case user = "User"
+	case contact = "Contact"
 }
 
 enum LibraryState: Int {
