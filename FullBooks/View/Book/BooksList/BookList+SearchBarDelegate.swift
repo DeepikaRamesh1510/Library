@@ -28,7 +28,8 @@ extension BooksListViewController: UISearchBarDelegate {
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		self.searchText = searchText
 		self.currentPage = 1
-//		clearBookContentsInList()
+		clearFullLibraryBooksContent()
+		clearGoodReadsBooksContent()
 		if libraryState == .myLibrary {
 			tableView.displayLoadingSpinner()
 			getFullLibraryBooks(bySearch: searchText)
