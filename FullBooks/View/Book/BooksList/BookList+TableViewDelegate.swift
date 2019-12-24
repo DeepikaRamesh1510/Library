@@ -122,7 +122,7 @@ extension BooksListViewController: UITableViewDelegate , UITableViewDataSource {
 	//	scroll delegate to fetch more books
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		if libraryState == .goodReads {
+		if libraryState == .goodReads, goodReadsBooks.count > 0 {
 			
 			if (((scrollView.contentOffset.y + scrollView.frame.size.height) > scrollView.contentSize.height ) && !isLoadingList){
 				self.isLoadingList = true

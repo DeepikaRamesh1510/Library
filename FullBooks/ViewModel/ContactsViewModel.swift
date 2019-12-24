@@ -24,7 +24,7 @@ class ContactsViewModel {
 		self.coreDataManager = coreDataManager
 	}
 	
-	func createNewContact(emailId: String, fullName: String) {
+	func createNewContact(emailId: String, fullName: String,imageURL: URL?) {
 		guard let contactEntity = coreDataManager.instantiateEntity(forName: CoreDataEntity.contact.rawValue) else {
 			print("Failed to Create new contact!")
 			return
@@ -33,6 +33,7 @@ class ContactsViewModel {
 		newContact.emailId = emailId
 		newContact.fullName = fullName
 		newContact.isLoggedIn = true
+		newContact.imageUrl = imageURL
 		coreDataManager.saveContext{ (error) in
 			delegate?.validateLogginStatus(error: error)
 		}

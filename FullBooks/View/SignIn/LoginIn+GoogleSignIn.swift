@@ -32,7 +32,9 @@ extension LoginViewController: GIDSignInDelegate, ContactsDelegate {
         }
 		let emailId = user.profile.email
 		let fullName = user.profile.name
-		contactsViewModel.createNewContact(emailId: emailId!, fullName: fullName!)
+		let imageURL = user.profile.imageURL(withDimension: 70)
+//		print(imageURL)
+		contactsViewModel.createNewContact(emailId: emailId!, fullName: fullName!,imageURL: imageURL)
     }
     
     public func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,

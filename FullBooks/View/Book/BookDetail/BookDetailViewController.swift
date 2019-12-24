@@ -98,6 +98,12 @@ class BookDetailViewController: UIViewController {
 			let xmlParser = XMLResponseParser()
 			let synopsisContent = xmlParser.parseSynopsis(xmlData: data)
 			self.synopsis.text = synopsisContent.length > 5 ? synopsisContent : "Synopsis is not available!"
+			if self.libraryState == .myLibrary {
+				self.myLibraryBook?.synopsis = synopsisContent
+				self.fullBooksViewModel.updateBookContent()
+			} else {
+				self.goodReadsBook?.synopsis = synopsisContent
+			}
 				self.synopsis.removeLoaderFromDisplay()
 		}
 	}

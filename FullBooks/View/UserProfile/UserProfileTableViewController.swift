@@ -35,7 +35,6 @@ class UserProfileTableViewController: UITableViewController {
 		networkManager = rootNavigationController.networkManager
 		coreDataManager = rootNavigationController.coreDataManager
 		contactViewModel = ContactsViewModel(networkManager: networkManager, coreDataManager: coreDataManager)
-//		contactViewModel.delegate = self
 	}
 	
 	@IBAction func presentLogoutConfirmationAlert(_ sender: Any) {
@@ -60,6 +59,33 @@ class UserProfileTableViewController: UITableViewController {
 			}
 			self.username.text = user.fullName
 			self.userEmailId.text = user.emailId
+			self.userImage.layer.cornerRadius = self.userImage.frame.width /  2
+			if let imageData = user.imageData {
+				self.userImage.image = UIImage(data: imageData)
+				return
+			}
+			if let imageURL = user.imageUrl {
+				networkManager.getRequest(url: imageURL, encoding: nil, parameters: nil, headers: nil) { (data, error) in
+					if let error = error {
+						print("Error occured! - \(error)")
+						return
+					}
+					guard let data = data else {
+						print("Image not received!")
+						return
+					}
+					user.imageData = data
+					self.coreDataManager.saveContext { (error) in
+						guard let _ = error else {
+							print("Failed to the users image!")
+							return
+						}
+					}
+					DispatchQueue.main.async {
+						self.userImage.image = UIImage(data: data)
+					}
+				}
+			}
 		}
 	}
 	

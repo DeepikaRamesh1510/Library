@@ -144,6 +144,12 @@ class FullBooksViewModel {
         return book
     }
     
+	func updateBookContent() {
+		coreDataManager.saveContext { (error) in
+			print(error)
+		}
+	}
+	
 	func checkForChanges() -> Bool {
 		return coreDataManager.persistentContainer.viewContext.hasChanges
 	}
