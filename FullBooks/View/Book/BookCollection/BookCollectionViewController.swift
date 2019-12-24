@@ -18,12 +18,16 @@ class BookCollectionViewController: UIViewController {
 		super.viewDidLoad()
 		self.collectionView.delegate = self
 		self.collectionView.dataSource = self
-		setTheNavigationBarTitle()
+//		setNavigationBarTitle()
 		initializeFullLibraryViewModel()
 		getTheBooks()
 	}
 	
-	func setTheNavigationBarTitle() {
+	override func viewWillAppear(_ animated: Bool) {
+		setNavigationBarTitle()
+	}
+	
+	func setNavigationBarTitle() {
 	self.navigationController?.changeNavigationBarContent(target: self, title: "Full Library", rightBarButton: nil)
 	}
 	

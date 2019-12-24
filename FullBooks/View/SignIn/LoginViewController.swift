@@ -16,13 +16,20 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     var isUsernameValid = false
     var isPasswordValid = false
+	var contactsViewModel: ContactsViewModel!
 	
     override func viewDidLoad() {
 		super.viewDidLoad()
 		GIDSignIn.sharedInstance()?.presentingViewController = self
 		GIDSignIn.sharedInstance()?.delegate = self
 		navigationController?.hideNavigationBar()
+		initializeContactsViewModel()
     }
+	
+	func initializeContactsViewModel() {
+		let rootNavigationController = self.navigationController as! RootNavigationController
+		contactsViewModel = ContactsViewModel(networkManager: rootNavigationController.networkManager, coreDataManager: rootNavigationController.coreDataManager)
+	}
     
 	@IBAction func signInWithGoogle(_ sender: Any) {
 		GIDSignIn.sharedInstance()?.signIn()

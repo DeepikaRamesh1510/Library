@@ -10,16 +10,8 @@ import CoreData
 import UIKit
 
 protocol ContactsDelegate: class {
-	func loginStatus()
-	func displayToast(message: String)
+	func validateLogginStatus(error: CRUDError?)
 }
-
-extension ContactsDelegate where Self: UIViewController {
-	func displayToast(message: String) {
-		self.showToast(message: message)
-	}
-}
-
 
 class ContactsViewModel {
 	
@@ -32,30 +24,19 @@ class ContactsViewModel {
 		self.coreDataManager = coreDataManager
 	}
 	
-	func isContactAvailable(emailId: String) -> Bool {
-		fetchRequest.predicate = NSPredicate(format: "emailId=%@", emailId)
-		do {
-//			guard let result =
-		} catch {
-			
-		}
-		return false
-	}
-	
 	func createNewContact(emailId: String, fullName: String) {
-		if isContactAvailable(emailId: emailId) {
-			delegate?.displayToast(message: "User already registered!")
-			return
-		}
-		insertNewContactToStore(emailId: emailId, fullName: fullName)
-	}
-	
-	func insertNewContactToStore(emailId: String,fullName: String) {
 		guard let contactEntity = coreDataManager.instantiateEntity(forName: CoreDataEntity.contact.rawValue) else {
 			print("Failed to Create new contact!")
 			return
 		}
 		let newContact = Contact(entity: contactEntity, insertInto: coreDataManager.persistentContainer.viewContext)
+		newContact.emailId = emailId
+		newContact.fullName = fullName
+//		newContact.imageData = imageData
+		newContact.isLoggedIn = true
+		coreDataManager.saveContext{ (error) in
+			delegate?.validateLogginStatus(error: error)
+		}
 	}
 	
 	func getLoggedInUserDetail(emailId: String, completionHandler: (Contact?,Error?) -> Void) {
@@ -71,11 +52,4 @@ class ContactsViewModel {
 		}
 	}
 	
-	func loginUser() {
-		
-	}
-	
-	func logoutUser() {
-		
-	}
 }

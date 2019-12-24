@@ -20,6 +20,15 @@ class UserProfileTableViewController: UITableViewController {
 		initializeDataManager()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		setNavigationBarTitle()
+	}
+	
+	func setNavigationBarTitle() {
+	self.navigationController?.changeNavigationBarContent(target: self, title: "User Profile", rightBarButton: nil)
+	}
+	
+	
 	func initializeDataManager() {
 		let rootNavigationController = self.navigationController as! RootNavigationController
 		networkManager = rootNavigationController.networkManager

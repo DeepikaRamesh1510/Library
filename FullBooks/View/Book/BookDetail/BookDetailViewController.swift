@@ -10,6 +10,7 @@ import UIKit
 
 class BookDetailViewController: UIViewController {
 	
+	@IBOutlet var addBookButton: UIButton!
 	@IBOutlet weak var bookImage: UIImageView!
 	@IBOutlet weak var bookTitle: UILabel!
 	@IBOutlet weak var author: UILabel!
@@ -26,8 +27,8 @@ class BookDetailViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initializeFullLibraryViewModel()
-		performNavigationBarViewChanges()
-		updatePageWithContents()
+		setNavigationBarTitle()
+		modifyViewAccordingToLibraryState()
 		checkForSynopsis()
 	}
 	
@@ -101,7 +102,7 @@ class BookDetailViewController: UIViewController {
 		}
 	}
 	
-	func performNavigationBarViewChanges() {
+	func setNavigationBarTitle() {
 		let navigationTitle = libraryState == .myLibrary ? myLibraryBook?.title : goodReadsBook?.title
 		navigationController?.changeNavigationBarContent(target: self,title: navigationTitle ?? "Book Detail", rightBarButton: nil)
 	}
@@ -110,9 +111,13 @@ class BookDetailViewController: UIViewController {
 		return fullBooksViewModel.checkForChanges()
 	}
 	
-	func updatePageWithContents() {
+	func modifyViewAccordingToLibraryState() {
 		libraryState == .myLibrary ? updateBookDetails(title: myLibraryBook?.title, author: myLibraryBook?.authorName, synopsis: myLibraryBook?.synopsis, numberOfBooks: myLibraryBook?.noOfCopies,imageData: myLibraryBook?.image) : updateBookDetails(title: goodReadsBook?.title, author: goodReadsBook?.authorName, synopsis: goodReadsBook?.synopsis, numberOfBooks: goodReadsBook?.noOfCopies, imageData: goodReadsBook?.image)
-		
+		self.numberOfBooksStepper.isHidden =  libraryState == .myLibrary ? true : false
+		self.numberOfBooksStepper.isEnabled = libraryState == .myLibrary ? false : true
+		self.numberOfBooks.isEnabled = libraryState == .myLibrary ? false : true
+		self.addBookButton.isEnabled = libraryState == .myLibrary ? false : true
+		self.addBookButton.isHidden =  libraryState == .myLibrary ? true : false
 	}
 	
 	@IBAction func changeTheBooksCount(_ sender: UIStepper) {

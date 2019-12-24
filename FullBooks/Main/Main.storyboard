@@ -718,6 +718,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="SCO-FB-Sbs"/>
                     <connections>
+                        <outlet property="addBookButton" destination="HpB-bf-85y" id="gXR-wL-S2T"/>
                         <outlet property="author" destination="0PN-mW-jAs" id="Q2x-qL-lTS"/>
                         <outlet property="bookImage" destination="U9Q-AI-YzJ" id="f4f-sV-bzK"/>
                         <outlet property="bookTitle" destination="V0h-cg-roz" id="pBa-VS-YEc"/>

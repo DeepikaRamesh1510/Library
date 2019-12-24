@@ -25,11 +25,15 @@ class BooksListViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		configuringNavigationBar()
+//		setNavigationBarTitle()
 		configuringTableView()
 		initializeTheBookManager()
 		assignDelegatePropertiesValue()
 		getTheBooks()
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		setNavigationBarTitle()
 	}
 	
 	func initializeTheBookManager() {
@@ -97,7 +101,7 @@ class BooksListViewController: UIViewController {
 		tableView.dismissTableViewOnDrag()
 	}
 	
-	func configuringNavigationBar() {
+	func setNavigationBarTitle() {
 		tabBarController?.navigationItem.title = "Books"
 	}
 	

@@ -20,16 +20,6 @@ extension LoginViewController: GIDSignInDelegate {
             }
             return
         }
-		
-//        let idToken = user.authentication.idToken
-//        let fullName = user.profile.name
-//        let email = user.profile.email
-//		let refreshTokenForUser = user.authentication.refreshToken
-//		userDefault.set(fullName, forKey: UserDefaultKey.userName.rawValue)
-//		userDefault.set(email, forKey: UserDefaultKey.emailId.rawValue)
-//		userDefault.set(true,forKey: UserDefaultKey.isLoggedIn.rawValue)
-//		let userImage = user.profile.imageURL(withDimension: 44)
-//		userDefault.setValue(user, forKey: userDetail)
 		navigationController?.makeTabbarPageRootViewController()
 		
     }
