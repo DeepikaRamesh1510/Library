@@ -38,6 +38,22 @@ extension BookCollectionViewController: UICollectionViewDelegate,UICollectionVie
 		return bookCell
 	}
 	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		showBookDetailPage( myLibraryBook: myLibraryBooks[indexPath.item])
+		collectionView.deselectItem(at: indexPath, animated: true)
+	}
+	
+	func showBookDetailPage(myLibraryBook: Book?) {
+		guard let bookDetailViewController = storyboard?.instantiateViewController(withIdentifier: ViewController.bookDetailViewController.rawValue) as? BookDetailViewController else {
+			return
+		}
+		
+			bookDetailViewController.myLibraryBook = myLibraryBook
+		
+		bookDetailViewController.libraryState = .myLibrary
+		navigationController?.pushViewController(bookDetailViewController, animated: true)
+	}
+	
 }
 
 extension BookCollectionViewController: UICollectionViewDelegateFlowLayout {
