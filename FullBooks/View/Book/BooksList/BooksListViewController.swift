@@ -50,22 +50,28 @@ class BooksListViewController: UIViewController {
 	}
 	
 	@IBAction func libraryChanged(_ sender: Any) {
+		clearSearchBarContent()
+//		clearBookContentsInList()
 		switch segmentedControl.selectedSegmentIndex {
 			case 0:
 				libraryState = .goodReads
+				clearFullLibraryBooksContent()
 			case 1:
+				clearGoodReadsBooksContent()
 				libraryState = .myLibrary
 				getTheBooks()
 			default:
 				print("Nothing is selected")
 		}
-		clearSearchBarContent()
-		clearBookContentsInList()
 	}
 	
-	func clearBookContentsInList() {
-		self.myLibraryBooks = []
+	func clearGoodReadsBooksContent() {
 		self.goodReadsBooks = []
+		tableView.reloadData()
+	}
+	
+	func clearFullLibraryBooksContent() {
+		self.myLibraryBooks = []
 		tableView.reloadData()
 	}
 	

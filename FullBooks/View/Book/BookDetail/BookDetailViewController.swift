@@ -29,9 +29,12 @@ class BookDetailViewController: UIViewController {
 		performNavigationBarViewChanges()
 		updatePageWithContents()
 		checkForSynopsis()
+	}
+	
+	func configureStepper() {
 		numberOfBooksStepper.minimumValue = 1
 		numberOfBooksStepper.autorepeat = true
-		numberOfBooksStepper.wrap
+		numberOfBooksStepper.wraps = true
 	}
 	
 	func initializeFullLibraryViewModel() {
@@ -93,7 +96,7 @@ class BookDetailViewController: UIViewController {
 			}
 			let xmlParser = XMLResponseParser()
 			let synopsisContent = xmlParser.parseSynopsis(xmlData: data)
-			self.synopsis.text = synopsisContent.length > 0 ? synopsisContent : "Synopsis is not available!"
+			self.synopsis.text = synopsisContent.length > 5 ? synopsisContent : "Synopsis is not available!"
 				self.synopsis.removeLoaderFromDisplay()
 		}
 	}
@@ -112,6 +115,9 @@ class BookDetailViewController: UIViewController {
 		
 	}
 	
+	@IBAction func changeTheBooksCount(_ sender: UIStepper) {
+		numberOfBooks.text = Int(numberOfBooksStepper.value).description
+	}
 	func updateBookDetails(title: String?, author: String?, synopsis: String?, numberOfBooks: Int16?, imageData: Data?) {
 		self.bookTitle.text = title
 		self.author.text = author
