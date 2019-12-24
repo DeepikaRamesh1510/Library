@@ -18,12 +18,11 @@ class BookCollectionViewController: UIViewController {
 		super.viewDidLoad()
 		self.collectionView.delegate = self
 		self.collectionView.dataSource = self
-//		setNavigationBarTitle()
 		initializeFullLibraryViewModel()
-		getTheBooks()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
+		getTheBooks()
 		setNavigationBarTitle()
 	}
 	

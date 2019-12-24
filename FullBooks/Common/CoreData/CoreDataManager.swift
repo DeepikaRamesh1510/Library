@@ -15,15 +15,18 @@ class CoreDataManager {
 	init(modelName: String) {
 		self.modelName = modelName
 	}
+	
+	let loadStoreCompletionHandler: (NSPersistentStoreDescription, Error?) -> Void = { (storeDescription, error) in
+		if let error = error as NSError? {
+			print("Unresolved error \(error), \(error.userInfo)")
+			return
+		}
+	}
+	
 	lazy var persistentContainer: NSPersistentContainer = {
 		
 		let container = NSPersistentContainer(name: modelName)
-		container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-			if let error = error as NSError? {
-				print("Unresolved error \(error), \(error.userInfo)")
-				return
-			}
-		})
+		container.loadPersistentStores(completionHandler: loadStoreCompletionHandler)
 		return container
 	}()
 	
@@ -49,13 +52,14 @@ class CoreDataManager {
 		return NSEntityDescription.entity(forEntityName: entity, in: persistentContainer.viewContext)
 	}
 	
-	func deletePersistantStore(completionHandler: @escaping (Error?) -> Void) {
+	func restorePersistantStore(completionHandler: @escaping (Error?) -> Void) {
 		let persistentStores = persistentContainer.persistentStoreCoordinator.persistentStores
 		for persistentStore in persistentStores {
 			if persistentStore.type == NSSQLiteStoreType {
 				let persistentStoreURL = persistentContainer.persistentStoreCoordinator.url(for: persistentStore)
 				do {
 					try persistentContainer.persistentStoreCoordinator.destroyPersistentStore(at: persistentStoreURL, ofType: NSSQLiteStoreType, options: nil)
+					persistentContainer.loadPersistentStores(completionHandler: loadStoreCompletionHandler)
 					completionHandler(nil)
 				} catch {
 					completionHandler(error)

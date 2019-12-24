@@ -9,7 +9,16 @@
 import GoogleSignIn
 import SwiftKeychainWrapper
 
-extension LoginViewController: GIDSignInDelegate {
+extension LoginViewController: GIDSignInDelegate, ContactsDelegate {
+	func validateLogginStatus(error: CRUDError?) {
+		guard let error = error else {
+		navigationController?.makeTabbarPageRootViewController()
+			return
+		}
+		print(error)
+		self.showToast(message: "Login Failed!")
+	}
+	
 
     public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
@@ -18,10 +27,12 @@ extension LoginViewController: GIDSignInDelegate {
             } else {
                 print("\(error.localizedDescription)")
             }
+			showToast(message: "Login Failed")
             return
         }
-		navigationController?.makeTabbarPageRootViewController()
-		
+		let emailId = user.profile.email
+		let fullName = user.profile.name
+		contactsViewModel.createNewContact(emailId: emailId!, fullName: fullName!)
     }
     
     public func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,

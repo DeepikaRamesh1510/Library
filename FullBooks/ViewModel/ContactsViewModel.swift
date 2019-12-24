@@ -32,15 +32,14 @@ class ContactsViewModel {
 		let newContact = Contact(entity: contactEntity, insertInto: coreDataManager.persistentContainer.viewContext)
 		newContact.emailId = emailId
 		newContact.fullName = fullName
-//		newContact.imageData = imageData
 		newContact.isLoggedIn = true
 		coreDataManager.saveContext{ (error) in
 			delegate?.validateLogginStatus(error: error)
 		}
 	}
 	
-	func getLoggedInUserDetail(emailId: String, completionHandler: (Contact?,Error?) -> Void) {
-		fetchRequest.predicate = NSPredicate(format: "isLoggedIn=%@", true)
+	func getLoggedInUserDetail(completionHandler: (Contact?,Error?) -> Void) {
+//		fetchRequest.predicate = NSPredicate(format: "isLoggedIn=%@", true)
 		do {
 			guard let result = try coreDataManager.fetch(fetchRequest: fetchRequest), let userDetails = result.last as? Contact else {
 				completionHandler(nil,nil)

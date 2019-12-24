@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
 	
     override func viewDidLoad() {
 		super.viewDidLoad()
-		GIDSignIn.sharedInstance()?.presentingViewController = self
+	GIDSignIn.sharedInstance()?.presentingViewController = self
 		GIDSignIn.sharedInstance()?.delegate = self
 		navigationController?.hideNavigationBar()
 		initializeContactsViewModel()
@@ -29,6 +29,7 @@ class LoginViewController: UIViewController {
 	func initializeContactsViewModel() {
 		let rootNavigationController = self.navigationController as! RootNavigationController
 		contactsViewModel = ContactsViewModel(networkManager: rootNavigationController.networkManager, coreDataManager: rootNavigationController.coreDataManager)
+		contactsViewModel.delegate = self
 	}
     
 	@IBAction func signInWithGoogle(_ sender: Any) {

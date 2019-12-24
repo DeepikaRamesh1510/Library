@@ -46,7 +46,7 @@ class UserProfileTableViewController: UITableViewController {
 	}
 	
 	func logoutUser() {
-		coreDataManager.deletePersistantStore { (error) in
+		coreDataManager.restorePersistantStore { (error) in
 			guard let error = error else {
 				self.showToast(message: "Logged out!")
 				self.navigationController?.makeLogginPageRootViewController()

@@ -20,13 +20,22 @@ class RootNavigationController: UINavigationController {
 	}
 	
 	func checkIfUserAlreadyLoggedIn() {
-		let loginFlag = true
-//		let loginFlag = userDefault.bool(forKey: isLoggedIn)
-		if loginFlag {
-			self.makeTabbarPageRootViewController()
-		} else {
+		let contactViewModel = ContactsViewModel(networkManager: networkManager, coreDataManager: coreDataManager)
+//		let loginFlag =
+		contactViewModel.getLoggedInUserDetail() { (contact,error) in
+			guard let error = error else {
+				self.makeTabbarPageRootViewController()
+				return
+			}
+			print(error)
 			self.makeLogginPageRootViewController()
 		}
+//		let loginFlag = userDefault.bool(forKey: isLoggedIn)
+//		if loginFlag {
+//			self.makeTabbarPageRootViewController()
+//		} else {
+//			self.makeLogginPageRootViewController()
+//		}
 	}
 	
 	
