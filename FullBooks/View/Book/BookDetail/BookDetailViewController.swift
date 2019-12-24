@@ -108,7 +108,7 @@ class BookDetailViewController: UIViewController {
 			navBarTitle = bookTitle
 		}
 		navBarTitle = navBarTitle.length > 0 ? navBarTitle : "Book Detail"
-		navigationController?.changeNavigationBarContent(target: self,title: navBarTitle, rightBarButton: nil)
+		navigationItem.title = navBarTitle
 	}
 	
 	func checkForAnyChanges() -> Bool {
