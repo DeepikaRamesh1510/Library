@@ -11,11 +11,12 @@ import UIKit
 extension BooksListViewController: UITableViewDelegate , UITableViewDataSource {
 	
 	//MARK: helper methods for cell and table modification according to library state and the book count
-	func modifyBookCellByState(title: String, author: String, imageData: Data?) -> BookTableViewCell {
+	func modifyBookCellByState(title: String, author: String, imageData: Data?, rating: Float) -> BookTableViewCell {
 		let bookCell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as! BookTableViewCell
 		bookCell.title.text = title
 		bookCell.author.text = author
 		bookCell.parentViewController = self
+//		bookCell.
 		bookCell.addBookButton.isEnabled = libraryState == .goodReads ? true : false
 		bookCell.addBookButton.isHidden = libraryState == .goodReads ? false : true
 		if let imageData = imageData {
@@ -74,9 +75,9 @@ extension BooksListViewController: UITableViewDelegate , UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard libraryState == .goodReads  else {
-			return modifyBookCellByState(title: myLibraryBooks[indexPath.item].title ?? "", author: myLibraryBooks[indexPath.item].authorName ?? "", imageData: myLibraryBooks[indexPath.item].image)
+			return modifyBookCellByState(title: myLibraryBooks[indexPath.item].title ?? "", author: myLibraryBooks[indexPath.item].authorName ?? "", imageData: myLibraryBooks[indexPath.item].image, rating: myLibraryBooks[indexPath.item].rating)
 		}
-		let goodReadsBookCell = modifyBookCellByState(title: goodReadsBooks[indexPath.item].title, author: goodReadsBooks[indexPath.item].authorName, imageData: nil)
+		let goodReadsBookCell = modifyBookCellByState(title: goodReadsBooks[indexPath.item].title, author: goodReadsBooks[indexPath.item].authorName, imageData: nil, rating: goodReadsBooks[indexPath.item].rating)
 		goodReadsBooksViewModel.fetchBookImage(imageURL: goodReadsBooks[indexPath.item].imageUrl){ (data,error) in
 			if let error = error {
 				print(error.localizedDescription)

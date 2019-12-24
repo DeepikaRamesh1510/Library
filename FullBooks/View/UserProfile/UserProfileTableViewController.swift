@@ -15,9 +15,11 @@ class UserProfileTableViewController: UITableViewController {
 	@IBOutlet var userImage: UIImageView!
 	var networkManager: NetworkManager!
 	var coreDataManager: CoreDataManager!
+	var contactViewModel: ContactsViewModel!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initializeDataManager()
+		getUserDetails()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -25,16 +27,16 @@ class UserProfileTableViewController: UITableViewController {
 	}
 	
 	func setNavigationBarTitle() {
-	self.navigationController?.changeNavigationBarContent(target: self, title: "User Profile", rightBarButton: nil)
+		self.navigationController?.changeNavigationBarContent(target: self, title: "User Profile", rightBarButton: nil)
 	}
-	
 	
 	func initializeDataManager() {
 		let rootNavigationController = self.navigationController as! RootNavigationController
 		networkManager = rootNavigationController.networkManager
 		coreDataManager = rootNavigationController.coreDataManager
+		contactViewModel = ContactsViewModel(networkManager: networkManager, coreDataManager: coreDataManager)
+//		contactViewModel.delegate = self
 	}
-	
 	
 	@IBAction func presentLogoutConfirmationAlert(_ sender: Any) {
 		let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
@@ -43,6 +45,22 @@ class UserProfileTableViewController: UITableViewController {
 		let noAction = UIAlertAction(title: "No", style: .default, handler: nil)
 		
 		self.showAlert(title: "Alert", message: "Are you sure you want to logout?", actions: [noAction, yesAction])
+	}
+	
+	func getUserDetails() {
+		contactViewModel.getLoggedInUserDetail { (user, error) in
+			if let error = error {
+				print("Failed to fetch the logged in user details! - \(error)")
+				navigationController?.makeLogginPageRootViewController()
+				return
+			}
+			guard let user = user else {
+				print("Failed to fetch the logged in user!")
+				return
+			}
+			self.username.text = user.fullName
+			self.userEmailId.text = user.emailId
+		}
 	}
 	
 	func logoutUser() {
