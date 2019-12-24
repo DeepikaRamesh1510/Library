@@ -37,12 +37,12 @@ class UserProfileTableViewController: UITableViewController {
 	
 	
 	@IBAction func presentLogoutConfirmationAlert(_ sender: Any) {
-		let okAction = UIAlertAction(title: "Ok", style: .destructive) { (action) in
+		let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
 			self.logoutUser()
 		}
-		let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+		let noAction = UIAlertAction(title: "No", style: .default, handler: nil)
 		
-		self.showAlert(title: "Alert", message: "Are you sure you want to logout?", actions: [cancelAction, okAction])
+		self.showAlert(title: "Alert", message: "Are you sure you want to logout?", actions: [noAction, yesAction])
 	}
 	
 	func logoutUser() {
