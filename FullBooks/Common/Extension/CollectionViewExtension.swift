@@ -17,6 +17,9 @@ extension UICollectionView {
         messageLabel.textAlignment = .center
         messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
         messageLabel.sizeToFit()
-        self.backgroundView = messageLabel
+		self.setBackgroundView(view: messageLabel)
     }
+	func setBackgroundView(view: UIView?) {
+		self.backgroundView = view
+	}
 }

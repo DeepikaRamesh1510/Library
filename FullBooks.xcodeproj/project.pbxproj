@@ -42,6 +42,7 @@
 		CEC8EA302397D6F6006840AF /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8EA2F2397D6F6006840AF /* CoreDataManager.swift */; };
 		CED93C8A23A0F33B00877E4E /* XMLResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED93C8923A0F33B00877E4E /* XMLResponseParser.swift */; };
 		CEE93D7123B1DA7300A4C0F0 /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE93D7023B1DA7300A4C0F0 /* StarRating.swift */; };
+		CEE93D7323B2146900A4C0F0 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE93D7223B2146900A4C0F0 /* FavoriteViewModel.swift */; };
 		CEEEBEA4239540FF006659F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEBEA3239540FF006659F8 /* AppDelegate.swift */; };
 		CEEEBEAE239540FF006659F8 /* FullBooks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEEEBEAC239540FF006659F8 /* FullBooks.xcdatamodeld */; };
 		CEEEBEB023954105006659F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEEBEAF23954105006659F8 /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		CEC8EA2F2397D6F6006840AF /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CED93C8923A0F33B00877E4E /* XMLResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLResponseParser.swift; sourceTree = "<group>"; };
 		CEE93D7023B1DA7300A4C0F0 /* StarRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRating.swift; sourceTree = "<group>"; };
+		CEE93D7223B2146900A4C0F0 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		CEEEBEA0239540FF006659F8 /* FullBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEEBEA3239540FF006659F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		CEEEBEAD239540FF006659F8 /* FullLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FullLibrary.xcdatamodel; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				CE2C0CFB2398BFBF00CADB4A /* FullBooksViewModel.swift */,
 				CE8A256B23AE24C10051A15D /* GoodReadsBooksViewModel.swift */,
 				CEC2918723AFEB9B00F7F7CC /* ContactsViewModel.swift */,
+				CEE93D7223B2146900A4C0F0 /* FavoriteViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE409D85239581DD001B5149 /* LoginViewController.swift in Sources */,
+				CEE93D7323B2146900A4C0F0 /* FavoriteViewModel.swift in Sources */,
 				CEEEBEAE239540FF006659F8 /* FullBooks.xcdatamodeld in Sources */,
 				CED93C8A23A0F33B00877E4E /* XMLResponseParser.swift in Sources */,
 				CE2C0CFA23983C6B00CADB4A /* BookDetailViewController.swift in Sources */,

@@ -19,7 +19,7 @@ class XMLResponseParser: NSObject, XMLParserDelegate {
 	var authorName = ""
 	var synopsis = ""
 	var imageURL = ""
-	var rating = ""
+	var rating: Float = 0.0
 //	var imageData: UIImage?
 	
 	//MARK: Serializing the XML Data
@@ -61,7 +61,7 @@ class XMLResponseParser: NSObject, XMLParserDelegate {
 			} else if self.elementName == "small_image_url" {
 				self.imageURL += data
 			} else if self.elementName == "average_rating" {
-				self.imageURL += data
+				self.rating += Float(data) ?? 0.0
 			}
 		}
 	}
@@ -79,7 +79,6 @@ class XMLResponseParser: NSObject, XMLParserDelegate {
 			self.synopsis = ""
 			self.id = ""
 			self.imageURL = ""
-			self.rating = ""
 		} else if elementName == "description" {
 			self.synopsis = ""
 		}
@@ -94,7 +93,7 @@ class XMLResponseParser: NSObject, XMLParserDelegate {
 			tempBook.bookId = self.id;
 			tempBook.authorName = self.authorName;
 			tempBook.title = self.title;
-			tempBook.rating = Float(self.rating) ?? 0.0
+			tempBook.rating = self.rating
 			tempBook.imageUrl = self.imageURL
 			print(tempBook)
 			self.books.append(tempBook);

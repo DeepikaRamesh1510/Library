@@ -16,25 +16,16 @@ extension BookCollectionViewController: UICollectionViewDelegate,UICollectionVie
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		if myLibraryBooks.count == 0 {
-			collectionView.setEmptyMessage("No Books added to library!")
-		}
+		myLibraryBooks.count == 0 ?
+			collectionView.setEmptyMessage("No Books added to library!") : collectionView.setBackgroundView(view: nil)
+		
 		return myLibraryBooks.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let bookCell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCollectionViewCell", for: indexPath) as! BookCollectionViewCell
-		bookCell.rating?.text = String(myLibraryBooks[indexPath.row].rating)
-		bookCell.author?.text = myLibraryBooks[indexPath.row].authorName
-		bookCell.title?.text = myLibraryBooks[indexPath.row].title
-		if let imageData = myLibraryBooks[indexPath.row].image {
-			bookCell.bookImage?.image = UIImage(data: imageData)
-		} else {
-			bookCell.bookImage?.image = UIImage(named: "BookList")
-		}
-		bookCell.layer.borderWidth = 1
-		bookCell.layer.borderColor = UIColor.systemGray.cgColor
-		bookCell.layer.cornerRadius = 5
+		bookCell.fullBooksViewModel = fullBooksViewModel
+		bookCell.updateCellComponent(newBook: myLibraryBooks[indexPath.row])
 		return bookCell
 	}
 	

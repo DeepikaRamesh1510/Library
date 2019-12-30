@@ -16,7 +16,6 @@ extension BooksListViewController: UITableViewDelegate , UITableViewDataSource {
 		bookCell.title.text = title
 		bookCell.author.text = author
 		bookCell.parentViewController = self
-//		bookCell.
 		bookCell.addBookButton.isEnabled = libraryState == .goodReads ? true : false
 		bookCell.addBookButton.isHidden = libraryState == .goodReads ? false : true
 		if let imageData = imageData {

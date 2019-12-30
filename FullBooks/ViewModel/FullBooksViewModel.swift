@@ -48,7 +48,7 @@ class FullBooksViewModel {
 		book.authorName = author
 		book.bookId = bookId
 		book.rating = rating ?? 0.0
-		book.favorite = false
+		book.isFavorite = false
 		book.genre = "Genre not specified"
 		book.image = imageData
 		book.noOfCopies = numberOfCopies

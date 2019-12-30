@@ -28,20 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	open func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return GIDSignIn.sharedInstance().handle(url)
     }
-    
-//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-//        
-//        print("call back url is returned")
-//        var parameters: [String: String] = [:]
-//        URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
-//            parameters[$0.name] = $0.value
-//        }
-//        if parameters.keys.contains("code") {
-//            code = parameters["code"]
-//        }
-//        return false
-//    }
-	
 
 }
     

@@ -71,7 +71,6 @@ class BookDetailViewController: UIViewController {
 	}
 	func checkForSynopsis() {
 		var bookId: String
-		synopsis.displayLoadingSpinner()
 		if libraryState == .myLibrary {
 			if let synopsisOfBook = myLibraryBook?.synopsis, synopsisOfBook.length > 0  {
 				return
@@ -86,6 +85,7 @@ class BookDetailViewController: UIViewController {
 		guard bookId.length > 0 else {
 			return
 		}
+		synopsis.displayLoadingSpinner()
 		goodReadsBooksViewModel.fetchSynopsis(bookId: bookId) { (data,error) in
 			if let error = error {
 				print(error.localizedDescription)
