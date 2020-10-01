@@ -1,6 +1,0 @@
-module Pods_FullLibrary {
-  umbrella header "Pods-FullLibrary-umbrella.h"
-
-  export *
-  module * { export * }
-}
