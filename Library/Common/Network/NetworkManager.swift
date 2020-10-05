@@ -6,7 +6,7 @@
 //  Copyright © 2019 user. All rights reserved.
 //
 
-//import Foundation
+import Foundation
 import Alamofire
 
 
@@ -20,7 +20,7 @@ class NetworkManager {
 		let statusCode = response.statusCode
 		switch statusCode {
 			case 200..<300:
-				return .success
+				return .success(())
 			case 400..<500:
 				return .failure(HTTPResponseError.clientError)
 			case 500..<600:
@@ -55,7 +55,7 @@ class NetworkManager {
 	
 	func makeRequest(url: URLConvertible, method: HTTPMethod,encoding: ParameterEncoding?,parameters: Parameters?, headers: HTTPHeaders?, completionHandler:@escaping (Data?, Error?) -> Void ) {
 		let parameterEncoding = encoding ?? URLEncoding.default
-		Alamofire.request(url, method: method, parameters: parameters, encoding: parameterEncoding, headers: headers).validate(validationClosure).responseData { response in
+		AF.request(url, method: method, parameters: parameters, encoding: parameterEncoding, headers: headers).validate(validationClosure).responseData { response in
 			switch response.result {
 				case .success:
 					guard let data = response.data else {

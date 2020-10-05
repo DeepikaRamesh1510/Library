@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 class ManageBookList {
-    lazy var dataManager = DataManager()
+    lazy var dataManager = CoreDataManager(modelName: "FullBooks")
     func fetchBookList(){
         let fetchBookRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Booklist")
         do {
