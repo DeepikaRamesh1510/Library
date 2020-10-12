@@ -6,11 +6,11 @@
 //
 
 import UIKit
-//import BehaviourAnalyzer
 import Keys
 import GoogleSignIn
 import SwiftKeychainWrapper
 import Firebase
+import BehaviourAnalyzer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var code: String?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
         FirebaseApp.configure()
+        AnalyticsLogger.register([DefaultAnalyticsProvider(), DefaultFirebaseAnalyticsProvider()])
         return true
     }
     

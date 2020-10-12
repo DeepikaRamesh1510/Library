@@ -7,19 +7,22 @@
 //
 
 import UIKit
+import BehaviourAnalyzer
 
 class UserProfileTableViewController: UITableViewController {
 	
 	@IBOutlet var userEmailId: UILabel!
 	@IBOutlet var username: UILabel!
 	@IBOutlet var userImage: UIImageView!
+    var user: Contact?
 	var networkManager: NetworkManager!
 	var coreDataManager: CoreDataManager!
 	var contactViewModel: ContactsViewModel!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		initializeDataManager()
-		getUserDetails()
+        getUserDetails()
+        AnalyticsLogger.trackEvent(UserProfileEvents.viewed)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -48,15 +51,17 @@ class UserProfileTableViewController: UITableViewController {
 	
 	func getUserDetails() {
 		contactViewModel.getLoggedInUserDetail { (user, error) in
-			if let error = error {
-				print("Failed to fetch the logged in user details! - \(error)")
-				navigationController?.makeLogginPageRootViewController()
-				return
-			}
+            
+            guard error != nil else {
+                print("Failed to fetch the logged in user details!")
+                navigationController?.makeLogginPageRootViewController()
+                return
+            }
 			guard let user = user else {
 				print("Failed to fetch the logged in user!")
 				return
 			}
+            self.user = user
 			self.username.text = user.fullName
 			self.userEmailId.text = user.emailId
 			self.userImage.layer.cornerRadius = self.userImage.frame.width /  2
@@ -106,4 +111,21 @@ class UserProfileTableViewController: UITableViewController {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	
+}
+
+enum UserProfileEvents: AnalyticsEvent {
+    case viewed
+    
+    var name: String {
+        switch self {
+        case .viewed:
+            return "UserProfileViewed"
+        }
+    }
+    var parameters: AnalyticsParameters {
+        return [:]
+    }
+    var userProperties: AnalyticsUserProperties {
+        [:]
+    }
 }
